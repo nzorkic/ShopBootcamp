@@ -15,15 +15,10 @@
 
 package com.msgnetconomy.shop.controllers;
 
-import com.msgnetconomy.shop.servies.UserService;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -33,28 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/")
 public class UserController {
 
-    @Resource
-    UserService userService;
-
-    @GetMapping("/login")
-    public String login(HttpServletRequest request) {
-        userService.login("username", "password");
-        return "login";
-    }
-
-    @GetMapping("/register")
-    public String register() {
-        return "register";
-    }
-
-    @PostMapping("/register")
-    public User register(User user) {
-        return userService.register(user);
-    }
-
     @GetMapping("/user")
-    public String getUser(Model model, String username) {
-        userService.findByUsername(username);
+    public String login(HttpServletRequest request) {
         return "user";
     }
 }
