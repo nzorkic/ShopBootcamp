@@ -1,14 +1,13 @@
 package com.msgnetconomy.shop.servies;
 
-import org.apache.catalina.User;
-import org.springframework.stereotype.Service;
 
-@Service
+import com.msgnetconomy.shop.domain.UserEntity;
+
 public interface UserService {
 
-    User login(String username, String password);
+    UserEntity login(String username, String password);
 
-    User register(User user);
+    UserEntity register(UserEntity user);
 
-    User findByUsername(String username);
+    UserEntity findByUsername(String username);
 }

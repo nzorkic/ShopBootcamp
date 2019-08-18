@@ -15,8 +15,8 @@
 
 package com.msgnetconomy.shop.controllers;
 
+import com.msgnetconomy.shop.domain.UserEntity;
 import com.msgnetconomy.shop.servies.UserService;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
 
     @Resource
-    UserService userService;
+    private UserService userService;
 
     @GetMapping("/login")
     public String login(HttpServletRequest request) {
@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User register(User user) {
+    public UserEntity register(UserEntity user) {
         return userService.register(user);
     }
 
