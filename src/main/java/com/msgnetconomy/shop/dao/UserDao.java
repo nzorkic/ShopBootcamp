@@ -1,13 +1,13 @@
 package com.msgnetconomy.shop.dao;
 
-import com.msgnetconomy.shop.domain.UserEntity;
+import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserDao extends JpaRepository<UserEntity, Integer> {
+public interface UserDao extends JpaRepository<User, Integer> {
 
-    @Query("SELECT u FROM UserEntity u WHERE u.username=?1")
-    UserEntity findByUsername(String username);
+    @Query("SELECT user FROM user u WHERE u.username=?1")
+    User findByUsername(String username);
 }
