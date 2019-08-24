@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user", schema = "shopdb")
+@Table(name = "user", schema = "shopdb", catalog = "")
 public class UserEntity {
     private int userId;
     private String firstName;
@@ -12,6 +12,7 @@ public class UserEntity {
     private String username;
     private String password;
     private String cartCode;
+    private String saltPassword;
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -89,5 +90,15 @@ public class UserEntity {
     @Override
     public int hashCode() {
         return Objects.hash(userId, firstName, lastName, username, password, cartCode);
+    }
+
+    @Basic
+    @Column(name = "salt_password", nullable = true, length = 45)
+    public String getSaltPassword() {
+        return saltPassword;
+    }
+
+    public void setSaltPassword(String saltPassword) {
+        this.saltPassword = saltPassword;
     }
 }
