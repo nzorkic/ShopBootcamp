@@ -12,7 +12,7 @@ public class UserEntity {
     private String username;
     private String password;
     private String cartCode;
-    private String saltPassword;
+    private String salt;
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -93,12 +93,12 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "salt_password", nullable = true, length = 45)
-    public String getSaltPassword() {
-        return saltPassword;
+    @Column(name = "salt", nullable = true, length = 45)
+    public String getSalt() {
+        return salt;
     }
 
-    public void setSaltPassword(String saltPassword) {
-        this.saltPassword = saltPassword;
+    public void setSalt(String saltPassword) {
+        this.salt = saltPassword;
     }
 }

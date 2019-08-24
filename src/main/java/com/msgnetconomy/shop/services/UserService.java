@@ -9,7 +9,7 @@ public interface UserService {
 
     UserEntity saveUser(UserEntity user);
 
-    UserEntity getUser(String username);
+    UserEntity getUserByUsername(String username);
 
     UserEntity updateUser(UserEntity user);
 }
