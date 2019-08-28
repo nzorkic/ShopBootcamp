@@ -15,15 +15,14 @@
 
 package com.msgnetconomy.shop.controllers;
 
-import com.msgnetconomy.shop.domain.UserEntity;
+import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.services.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.annotation.Resource;
 
 /**
  * @author nzorkic@netconomy.net
@@ -33,14 +32,13 @@ import javax.annotation.Resource;
 public class LoginController {
 
     private static final String PRODUCTS_PAGE = "products";
-    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @Resource
+    @Autowired
     private UserService userService;
 
     @GetMapping
-    public String login(UserEntity user) {
-        userService.findByUsername(user);
+    public String login(@RequestBody User user, @PathVariable Long uid) {
+        userService.findByUserID(user, uid);
         return PRODUCTS_PAGE;
     }
 }

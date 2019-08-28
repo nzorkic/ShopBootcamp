@@ -1,16 +1,17 @@
 package com.msgnetconomy.shop.services;
 
-import com.msgnetconomy.shop.domain.UserEntity;
+import com.msgnetconomy.shop.domain.User;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
 public interface UserService {
 
-    Optional<UserEntity> findByUsername(UserEntity user);
+    Optional<User> findByUserID(User user, Long uid);
 
-    UserEntity saveUser(UserEntity user);
+    User saveUser(User user);
 
-    UserEntity getUserByUsername(String username);
+    User getUserByUserID(Long uid);
 
-    UserEntity updateUser(UserEntity user);
+    ResponseEntity<User> updateUser(User user, Long uid);
 }

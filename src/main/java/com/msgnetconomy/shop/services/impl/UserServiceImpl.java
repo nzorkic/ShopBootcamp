@@ -1,12 +1,13 @@
 package com.msgnetconomy.shop.services.impl;
 
+import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.repository.UserRepository;
-import com.msgnetconomy.shop.domain.UserEntity;
 import com.msgnetconomy.shop.services.UserService;
 import com.msgnetconomy.shop.utils.PasswordUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -15,12 +16,12 @@ public class UserServiceImpl implements UserService {
 
     private static final int SALT_LENGTH = 30;
 
-    @Resource
+    @Autowired
     private UserRepository userRepository;
 
     @Override
-    public Optional<UserEntity> findByUsername(UserEntity user) {
-        Optional<UserEntity> userdb = userRepository.findByUsername(user.getUsername());
+    public Optional<User> findByUserID(User user, Long uid) {
+        Optional<User> userdb = Optional.of(userRepository.getOne(uid));
         AtomicBoolean passwordsMatch = new AtomicBoolean();
         userdb.ifPresent(userData ->
                 passwordsMatch.set(PasswordUtils.verifyUserPassword(
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity saveUser(UserEntity user) {
+    public User saveUser(User user) {
         String salt = PasswordUtils.getSalt(SALT_LENGTH);
         String encryptedPassword = PasswordUtils.generateSecurePassword(user.getPassword(), salt);
         user.setPassword(encryptedPassword);
@@ -38,14 +39,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity getUserByUsername(String username) {
-        UserEntity user = userRepository.getOne(username);
-        return user;
+    public User getUserByUserID(Long uid) {
+        return userRepository.getOne(uid);
     }
 
     @Override
-    public UserEntity updateUser(UserEntity user) {
-        return userRepository.updateUser(
-                user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getUserId());
+    public ResponseEntity<User> updateUser(User user, Long id) {
+        Optional<User> userdb = userRepository.findById(id);
+        if (!userdb.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        user.setUid(id);
+        userRepository.save(user);
+        return ResponseEntity.noContent().build();
+        //2.way
+        //return userRepository.updateUser(
+        //user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getUserId());
     }
 }

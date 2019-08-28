@@ -15,16 +15,17 @@
 
 package com.msgnetconomy.shop.controllers;
 
-import com.msgnetconomy.shop.domain.UserEntity;
+import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 
 /**
@@ -39,23 +40,22 @@ public class RegistrationController {
     private static final String LOGIN_PAGE = "login";
     private static final String REGISTRATION_PAGE = "registration";
 
-    @Resource
+    @Autowired
     private UserService userService;
 
     @GetMapping
     public ModelAndView register() {
         ModelAndView modelAndView = new ModelAndView();
-        UserEntity user = new UserEntity();
+        User user = new User();
         modelAndView.addObject("user", user);
         modelAndView.setViewName(REGISTRATION_PAGE);
         return modelAndView;
     }
 
     @PostMapping
-    public ModelAndView register(@Valid UserEntity user, BindingResult bindingResult) {
-        if (userService.findByUsername(user).isPresent()) {
-            bindingResult.rejectValue("username", "error.user",
-                    USERNAME_EXISTS);
+    public ModelAndView register(@Valid User user, @PathVariable Long uid, BindingResult bindingResult) {
+        if (userService.findByUserID(user, uid).isPresent()) {
+            bindingResult.rejectValue("username", "error.user", USERNAME_EXISTS);
         }
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
@@ -63,7 +63,7 @@ public class RegistrationController {
         } else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", REGISTERED_SUCCESSFULLY);
-            modelAndView.addObject("user", new UserEntity());
+            modelAndView.addObject("user", new User());
             modelAndView.setViewName(LOGIN_PAGE);
         }
         return modelAndView;

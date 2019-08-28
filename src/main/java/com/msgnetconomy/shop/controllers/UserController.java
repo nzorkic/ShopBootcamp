@@ -15,16 +15,11 @@
 
 package com.msgnetconomy.shop.controllers;
 
-import com.msgnetconomy.shop.domain.UserEntity;
+import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import javax.annotation.Resource;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author nzorkic@netconomy.net
@@ -35,18 +30,18 @@ public class UserController {
 
     private static final String USER_PAGE = "user";
 
-    @Resource
+    @Autowired
     private UserService userService;
 
-    @GetMapping("{username}")
-    public String getUser(@PathVariable String username) {
-        userService.getUserByUsername(username);
+    @GetMapping("{uid}")
+    public String getUser(@PathVariable Long uid) {
+        userService.getUserByUserID(uid);
         return USER_PAGE;
     }
 
-    @PutMapping("{username}")
-    public String updateUser(@RequestBody UserEntity user) {
-        userService.updateUser(user);
+    @PutMapping("{uid}")
+    public String updateUser(@RequestBody User user, @PathVariable Long uid) {
+        userService.updateUser(user, uid);
         return USER_PAGE;
     }
 
