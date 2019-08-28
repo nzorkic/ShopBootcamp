@@ -18,14 +18,7 @@ package com.msgnetconomy.shop.repository;
 import com.msgnetconomy.shop.domain.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
 /**
  * @author nzorkic@netconomy.net
  */
-public interface CategoryRepository extends JpaRepository<Category, Integer> {
-
-    List<Category> findAll();
-
-    Category getOne(Integer code);
-}
+public interface CategoryRepository extends JpaRepository<Category, Integer> { }
