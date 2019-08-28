@@ -18,7 +18,6 @@ package com.msgnetconomy.shop.services;
 import com.msgnetconomy.shop.domain.Product;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author nzorkic@netconomy.net
@@ -27,5 +26,7 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
-    Optional<Product> getProductByCode(int code);
+    Product getProductByCode(int code);
+
+    List<Product> getAllProductsForCategories(List<Integer> codes);
 }

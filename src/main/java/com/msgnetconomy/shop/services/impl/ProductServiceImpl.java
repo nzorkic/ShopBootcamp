@@ -21,7 +21,6 @@ import com.msgnetconomy.shop.services.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author nzorkic@netconomy.net
@@ -41,7 +40,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> getProductByCode(int code) {
-        return Optional.of(productRepository.getOne(code));
+    public Product getProductByCode(int code) {
+        return productRepository.getOne(code);
+    }
+
+    @Override
+    public List<Product> getAllProductsForCategories(List<Integer> codes) {
+        return productRepository.findAllForCategories(codes);
     }
 }

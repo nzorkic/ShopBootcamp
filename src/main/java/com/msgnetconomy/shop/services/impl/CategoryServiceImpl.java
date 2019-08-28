@@ -21,6 +21,7 @@ import com.msgnetconomy.shop.services.CategoryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author nzorkic@netconomy.net
@@ -37,5 +38,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public Category getCategoryByCode(int code) {
+        return categoryRepository.getOne(code);
     }
 }
