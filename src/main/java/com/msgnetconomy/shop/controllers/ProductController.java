@@ -36,7 +36,7 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("{code}")
-    public String getProductByCode(Model model, @PathVariable int code) {
+    public String getProductByCode(@PathVariable int code, Model model) {
         model.addAttribute("product", productService.getProductByCode(code));
         return PRODUCT_PAGE;
     }

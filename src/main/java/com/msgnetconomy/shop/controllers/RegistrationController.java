@@ -34,6 +34,11 @@ import javax.validation.Valid;
 @RequestMapping("/registration")
 public class RegistrationController {
 
+    private static final String REGISTERED_SUCCESSFULLY = "User has been registered successfully";
+    private static final String USERNAME_EXISTS = "There is already a user registered with the username provided";
+    private static final String LOGIN_PAGE = "login";
+    private static final String REGISTRATION_PAGE = "registration";
+
     @Resource
     private UserService userService;
 
@@ -42,7 +47,7 @@ public class RegistrationController {
         ModelAndView modelAndView = new ModelAndView();
         UserEntity user = new UserEntity();
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("registration");
+        modelAndView.setViewName(REGISTRATION_PAGE);
         return modelAndView;
     }
 
@@ -50,16 +55,16 @@ public class RegistrationController {
     public ModelAndView register(@Valid UserEntity user, BindingResult bindingResult) {
         if (userService.findByUsername(user).isPresent()) {
             bindingResult.rejectValue("username", "error.user",
-                    "There is already a user registered with the username provided");
+                    USERNAME_EXISTS);
         }
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("/registration");
+            modelAndView.setViewName(REGISTRATION_PAGE);
         } else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.addObject("successMessage", REGISTERED_SUCCESSFULLY);
             modelAndView.addObject("user", new UserEntity());
-            modelAndView.setViewName("/login");
+            modelAndView.setViewName(LOGIN_PAGE);
         }
         return modelAndView;
     }

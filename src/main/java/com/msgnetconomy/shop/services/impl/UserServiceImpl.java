@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     private static final int SALT_LENGTH = 30;
 
     @Resource
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public Optional<UserEntity> findByUsername(UserEntity user) {

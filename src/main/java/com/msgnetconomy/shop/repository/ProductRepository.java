@@ -28,10 +28,6 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    List<Product> findAll();
-
-    Product getOne(int code);
-
     @Query("SELECT p FROM Product p WHERE p.category.code IN ?1")
     List<Product> findAllForCategories(List<Integer> categoryCodes);
 }

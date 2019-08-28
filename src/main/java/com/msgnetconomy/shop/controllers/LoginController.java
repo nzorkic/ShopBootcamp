@@ -32,6 +32,7 @@ import javax.annotation.Resource;
 @RequestMapping("/login")
 public class LoginController {
 
+    private static final String PRODUCTS_PAGE = "products";
     private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Resource
@@ -40,6 +41,6 @@ public class LoginController {
     @GetMapping
     public String login(UserEntity user) {
         userService.findByUsername(user);
-        return "products";
+        return PRODUCTS_PAGE;
     }
 }
