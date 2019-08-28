@@ -10,8 +10,23 @@
 
 <div class="container">
     <div class="starter-template">
-        <h1>Spring Boot Web JSP Example</h1>
-        <h2 id="message-text">Message: ${name}</h2>
+        <h1>Categories:</h1>
+        <c:forEach items="${categories}" var="category">
+            <p>${category.name}</p>
+        </c:forEach>
+        <h1>Products:</h1>
+        <c:forEach items="${products}" var="product">
+            <img src="/images/products/${product.image}">
+            <p>Code: ${product.code}</p>
+            <p>Name: ${product.name}</p>
+            <p>Category: ${product.category.name}</p>
+            <p>Description: ${product.description}</p>
+            <p>Price: ${product.price}</p>
+            <p>Qty: ${product.quantity}</p>
+            <br>
+            <hr>
+            <br>
+        </c:forEach>
     </div>
 </div>
 
