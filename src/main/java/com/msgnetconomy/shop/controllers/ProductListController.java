@@ -33,14 +33,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.Optional;
 
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.PRODUCTS;
+
 /**
  * @author nzorkic@netconomy.net
  */
 @Controller
 @RequestMapping("/products")
 public class ProductListController {
-
-    private static final String PRODUCT_LIST_PAGE = "productList";
 
     @Autowired
     private ProductService productService;
@@ -53,7 +53,7 @@ public class ProductListController {
                               Model model) {
         Pageable pareRequest = PageProvider.createPageRequest(PageProvider.INITIAL_PAGE, PageProvider.PER_PAGE_DEFAULT);
         populateModelWithProducts(categoryCodes, model, pareRequest);
-        return PRODUCT_LIST_PAGE;
+        return PRODUCTS;
     }
 
     @GetMapping(path = "/page/{pageNumber}")
@@ -62,7 +62,7 @@ public class ProductListController {
                                      Model model) {
         Pageable pareRequest = PageProvider.createPageRequest(pageNumber, PageProvider.PER_PAGE_DEFAULT);
         populateModelWithProducts(categoryCodes, model, pareRequest);
-        return PRODUCT_LIST_PAGE;
+        return PRODUCTS;
     }
 
     private void populateModelWithProducts(List<Integer> categoryCodes, Model model, Pageable pareRequest) {

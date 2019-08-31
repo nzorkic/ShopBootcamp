@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.PRODUCT;
+
 /**
  * @author nzorkic@netconomy.net
  */
@@ -30,14 +32,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/product")
 public class ProductController {
 
-    private static final String PRODUCT_PAGE = "product";
-
     @Autowired
     private ProductService productService;
 
     @GetMapping("{code}")
     public String getProductByCode(@PathVariable int code, Model model) {
         model.addAttribute("product", productService.getProductByCode(code));
-        return PRODUCT_PAGE;
+        return PRODUCT;
     }
 }

@@ -16,17 +16,21 @@
 package com.msgnetconomy.shop.controllers;
 
 import com.msgnetconomy.shop.domain.User;
+import com.msgnetconomy.shop.forms.LoginForm;
 import com.msgnetconomy.shop.services.UserService;
 import com.msgnetconomy.shop.utils.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.LOGIN;
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.PRODUCTS;
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.REDIRECT_PREFIX;
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.SLASH;
 
 /**
  * @author nzorkic@netconomy.net
@@ -35,34 +39,31 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/login")
 public class LoginController {
 
-    private static final String PRODUCTS_PAGE = "productList";
-    private static final String LOGIN_PAGE = "login";
+    private static final String PRODUCTS_PAGE = SLASH + PRODUCTS;
+    private static final String LOGIN_PAGE = SLASH + LOGIN;
+    private static final String LOGIN_PAGE_REDIRECT = REDIRECT_PREFIX + LOGIN_PAGE;
 
     @Autowired
     private UserService userService;
 
     @GetMapping
-    public ModelAndView showLogin() {
-        ModelAndView modelAndView = new ModelAndView(LOGIN_PAGE);
-        return modelAndView;
+    public String showLogin() {
+        return LOGIN;
     }
 
     @PostMapping
-    public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView modelAndView;
-        User user = userService.findUserByUsername("fsafsafsafsa");
-        if (PasswordUtils.verifyUserPassword("12345678", user.getPassword(), user.getSalt())) {
-            modelAndView = new ModelAndView(PRODUCTS_PAGE);
-            modelAndView.addObject("firstName", user.getFirstName());
-            return modelAndView;
+    public String login(@ModelAttribute LoginForm loginForm, Model model) {
+        User user = userService.findUserByUsername(loginForm.getUsername());
+        boolean userVerified = PasswordUtils.verifyUserPassword(loginForm.getPassword(), user.getPassword(), user.getSalt());
+        if (!userVerified) {
+            model.addAttribute("errorMessage", "Username or Password is wrong!!");
+            return LOGIN_PAGE_REDIRECT;
         }
-        modelAndView = new ModelAndView(LOGIN_PAGE);
-        modelAndView.addObject("message", "Username or Password is wrong!!");
-        return modelAndView;
+        return REDIRECT_PREFIX + PRODUCTS_PAGE;
     }
 
     @GetMapping("/logout")
     public String logout() {
-        return LOGIN_PAGE;
+        return LOGIN_PAGE_REDIRECT;
     }
 }

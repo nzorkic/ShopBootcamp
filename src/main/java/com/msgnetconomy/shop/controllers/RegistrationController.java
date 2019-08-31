@@ -20,12 +20,17 @@ import com.msgnetconomy.shop.services.UserService;
 import com.msgnetconomy.shop.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.LOGIN;
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.REGISTRATION;
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.REDIRECT_PREFIX;
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.SLASH;
 
 /**
  * @author nzorkic@netconomy.net
@@ -34,9 +39,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    private static final String REGISTERED_SUCCESSFULLY = "User has been registered successfully";
-    private static final String LOGIN_PAGE = "login";
-    private static final String REGISTRATION_PAGE = "registration";
+    private static final String REGISTERED_SUCCESSFULLY = "User has been registered successfully!";
+    private static final String REGISTRATION_PAGE = SLASH + REGISTRATION;
+    private static final String LOGIN_PAGE = SLASH + LOGIN;
 
     @Autowired
     private UserService userService;
@@ -45,24 +50,20 @@ public class RegistrationController {
     private UserValidator userValidator;
 
     @GetMapping
-    public ModelAndView register(ModelAndView modelAndView) {
-        modelAndView.addObject("user", new User());
-        modelAndView.setViewName(REGISTRATION_PAGE);
-        return modelAndView;
+    public String register() {
+        return REGISTRATION;
     }
 
     @PostMapping
-    public ModelAndView register(@ModelAttribute("user") User user, BindingResult bindingResult, ModelAndView modelAndView) {
+    public String register(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName(REGISTRATION_PAGE);
-            return modelAndView;
+            return REDIRECT_PREFIX + REGISTRATION_PAGE;
         }
         userService.saveUser(user);
-        modelAndView.addObject("successMessage", REGISTERED_SUCCESSFULLY);
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName(LOGIN_PAGE);
-        return modelAndView;
+        model.addAttribute("successMessage", REGISTERED_SUCCESSFULLY);
+        model.addAttribute("user", user);
+        return REDIRECT_PREFIX + LOGIN_PAGE;
     }
 
 }

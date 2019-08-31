@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Guru Register Form</h1>
-<form:form action="registration" modelAttribute="user" method="post">
+<form:form action="registration" method="post">
     <table style="with: 50%">
         <tr>
             <td>First Name</td>
