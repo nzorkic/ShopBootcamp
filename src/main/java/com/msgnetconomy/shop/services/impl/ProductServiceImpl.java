@@ -18,6 +18,8 @@ package com.msgnetconomy.shop.services.impl;
 import com.msgnetconomy.shop.domain.Product;
 import com.msgnetconomy.shop.repository.ProductRepository;
 import com.msgnetconomy.shop.services.ProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,8 +37,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public Page<Product> getAllProductsForPage(Pageable pareRequest) {
+        return productRepository.findAll(pareRequest);
     }
 
     @Override
@@ -45,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProductsForCategories(List<Integer> codes) {
-        return productRepository.findAllForCategories(codes);
+    public Page<Product> getAllProductsForPageByCategories(List<Integer> codes, Pageable pareRequest) {
+        return productRepository.findAllForCategories(codes, pareRequest);
     }
 }
