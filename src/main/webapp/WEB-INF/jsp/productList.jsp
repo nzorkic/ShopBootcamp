@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <link href="/css/home.css" rel="stylesheet"/>
+    <link href="/css/productList.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -15,18 +15,40 @@
             <p>${category.name}</p>
         </c:forEach>
         <h1>Products:</h1>
-        <c:forEach items="${products}" var="product">
-            <img src="/images/products/${product.image}">
-            <p>Code: ${product.code}</p>
-            <p>Name: ${product.name}</p>
-            <p>Category: ${product.category.name}</p>
-            <p>Description: ${product.description}</p>
-            <p>Price: ${product.price}</p>
-            <p>Qty: ${product.quantity}</p>
-            <br>
-            <hr>
-            <br>
-        </c:forEach>
+        <div class="container">
+            <div id="products" class="row">
+                <c:forEach items="${products}" var="product">
+                    <div class="item  col-xs-4 col-lg-4">
+                        <div class="thumbnail">
+                            <img class="group list-group-image" src="/images/products/${product.image}" alt=""/>
+                            <div class="caption">
+                                <h4 class="group inner list-group-item-heading">${product.name} | ${product.category.name}</h4>
+                                <p class="group inner list-group-item-text">${product.description}</p>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <p class="lead">${product.price}</p>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="page-container middle">
+            <div class="pagination">
+                <ul>
+                    <li><a href="#"></a></li>
+                    <c:forEach begin="1" end="${pages}" varStatus="loop">
+                        <li><a href="/products/page/${loop.index}"></a></li>
+                    </c:forEach>
+                    <li><a href="#"></a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 

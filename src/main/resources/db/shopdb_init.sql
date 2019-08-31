@@ -45,14 +45,14 @@ CREATE TABLE cart_entry
 );
 CREATE TABLE user
 (
-    uid        BIGINT(19)  NOT NULL,
-    first_name VARCHAR(45)  DEFAULT NULL,
-    last_name  VARCHAR(45)  DEFAULT NULL,
-    username   VARCHAR(45)  DEFAULT NULL,
-    password   VARCHAR(255) DEFAULT NULL,
-    salt       VARCHAR(45)  DEFAULT NULL,
+    uid        BIGINT(19)   NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(45)  NOT NULL,
+    last_name  VARCHAR(45)  NOT NULL,
+    username   VARCHAR(45)  NOT NULL,
+    password   VARCHAR(255) NOT NULL,
+    salt       VARCHAR(45)  NOT NULL,
     image      VARCHAR(255) DEFAULT NULL,
-    cart_code  VARCHAR(45) NOT NULL,
+    cart_code  VARCHAR(45)  DEFAULT NULL,
     PRIMARY KEY (uid),
     CONSTRAINT fk_cart_for_user FOREIGN KEY (cart_code) REFERENCES cart (code) ON DELETE NO ACTION ON UPDATE NO ACTION
 );

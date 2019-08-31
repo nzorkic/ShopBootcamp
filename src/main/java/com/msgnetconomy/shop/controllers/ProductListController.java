@@ -20,11 +20,13 @@ import com.msgnetconomy.shop.services.CategoryService;
 import com.msgnetconomy.shop.services.ProductService;
 import com.msgnetconomy.shop.utils.PageProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -39,6 +41,7 @@ import java.util.Optional;
 public class ProductListController {
 
     private static final String PRODUCT_LIST_PAGE = "productList";
+    private static final String CATEGORIES = "categories";
 
     @Autowired
     private ProductService productService;
@@ -47,23 +50,32 @@ public class ProductListController {
     private CategoryService categoryService;
 
     @GetMapping
-    public String products(@RequestParam(value = "categories", required = false) List<Integer> categoryCodes,
-                           @RequestParam(value = "page", required = false) Optional<Integer> page,
-                           @RequestParam(value = "perPage", required = false) Integer perPage,
-                           Model model) {
-        Pageable pareRequest = PageProvider.createPageRequest(page, perPage);
+    public String getProducts(@RequestParam(value = "categories", required = false) List<Integer> categoryCodes,
+                              Model model) {
+        Pageable pareRequest = PageProvider.createPageRequest(PageProvider.INITIAL_PAGE, PageProvider.PER_PAGE_DEFAULT);
         populateModelWithProducts(categoryCodes, model, pareRequest);
-        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute(CATEGORIES, categoryService.getAllCategories());
+        return PRODUCT_LIST_PAGE;
+    }
+
+    @GetMapping(path = "/page/{pageNumber}")
+    public String getProductsForPage(@RequestParam(value = "categories", required = false) List<Integer> categoryCodes,
+                                     @PathVariable(value = "pageNumber") Optional<Integer> pageNumber,
+                                     Model model) {
+        Pageable pareRequest = PageProvider.createPageRequest(pageNumber, PageProvider.PER_PAGE_DEFAULT);
+        populateModelWithProducts(categoryCodes, model, pareRequest);
+        model.addAttribute(CATEGORIES, categoryService.getAllCategories());
         return PRODUCT_LIST_PAGE;
     }
 
     private void populateModelWithProducts(List<Integer> categoryCodes, Model model, Pageable pareRequest) {
-        List<Product> products;
+        Page<Product> products;
         if (CollectionUtils.isEmpty(categoryCodes)) {
-            products = productService.getAllProductsForPage(pareRequest).getContent();
+            products = productService.getAllProductsForPage(pareRequest);
         } else {
-            products = productService.getAllProductsForPageByCategories(categoryCodes, pareRequest).getContent();
+            products = productService.getAllProductsForPageByCategories(categoryCodes, pareRequest);
         }
-        model.addAttribute("products", products);
+        model.addAttribute("pages", products.getTotalPages());
+        model.addAttribute("products", products.getContent());
     }
 }
