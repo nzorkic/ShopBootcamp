@@ -16,6 +16,8 @@
 package com.msgnetconomy.shop.services;
 
 import com.msgnetconomy.shop.domain.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -24,9 +26,9 @@ import java.util.List;
  */
 public interface ProductService {
 
-    List<Product> getAllProducts();
+    Page<Product> getAllProductsForPage(Pageable pareRequest);
 
     Product getProductByCode(int code);
 
-    List<Product> getAllProductsForCategories(List<Integer> codes);
+    Page<Product> getAllProductsForPageByCategories(List<Integer> codes, Pageable pareRequest);
 }

@@ -13,21 +13,24 @@
  * (c) 2019 by NETCONOMY Software & Consulting GmbH
  *********************************************************************/
 
-package com.msgnetconomy.shop.repository;
+package com.msgnetconomy.shop.utils;
 
-import com.msgnetconomy.shop.domain.Product;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
  * @author nzorkic@netconomy.net
  */
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public class PageProvider {
 
-    @Query("SELECT p FROM Product p WHERE p.category.code IN ?1")
-    Page<Product> findAllForCategories(List<Integer> categoryCodes, Pageable pageable);
+    private static final int PER_PAGE_DEFAULT = 10;
+    private static final int INITIAL_PAGE = 0;
+
+    public static Pageable createPageRequest(Optional<Integer> page, Integer perPage) {
+        int currentPage = page.orElse(0) < 1 ? INITIAL_PAGE : page.get() - 1;
+        int productsFerPage = perPage == null ? PER_PAGE_DEFAULT : perPage;
+        return PageRequest.of(currentPage, productsFerPage);
+    }
 }

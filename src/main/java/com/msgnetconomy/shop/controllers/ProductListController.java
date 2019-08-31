@@ -18,7 +18,9 @@ package com.msgnetconomy.shop.controllers;
 import com.msgnetconomy.shop.domain.Product;
 import com.msgnetconomy.shop.services.CategoryService;
 import com.msgnetconomy.shop.services.ProductService;
+import com.msgnetconomy.shop.utils.PageProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author nzorkic@netconomy.net
@@ -44,18 +47,22 @@ public class ProductListController {
     private CategoryService categoryService;
 
     @GetMapping
-    public String products(@RequestParam(value = "categories", required = false) List<Integer> categoryCodes, Model model) {
-        populateModelWithProducts(categoryCodes, model);
+    public String products(@RequestParam(value = "categories", required = false) List<Integer> categoryCodes,
+                           @RequestParam(value = "page", required = false) Optional<Integer> page,
+                           @RequestParam(value = "perPage", required = false) Integer perPage,
+                           Model model) {
+        Pageable pareRequest = PageProvider.createPageRequest(page, perPage);
+        populateModelWithProducts(categoryCodes, model, pareRequest);
         model.addAttribute("categories", categoryService.getAllCategories());
         return PRODUCT_LIST_PAGE;
     }
 
-    private void populateModelWithProducts(List<Integer> categoryCodes, Model model) {
+    private void populateModelWithProducts(List<Integer> categoryCodes, Model model, Pageable pareRequest) {
         List<Product> products;
         if (CollectionUtils.isEmpty(categoryCodes)) {
-            products = productService.getAllProducts();
+            products = productService.getAllProductsForPage(pareRequest).getContent();
         } else {
-            products = productService.getAllProductsForCategories(categoryCodes);
+            products = productService.getAllProductsForPageByCategories(categoryCodes, pareRequest).getContent();
         }
         model.addAttribute("products", products);
     }
