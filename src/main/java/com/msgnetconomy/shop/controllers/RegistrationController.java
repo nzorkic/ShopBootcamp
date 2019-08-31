@@ -17,52 +17,52 @@ package com.msgnetconomy.shop.controllers;
 
 import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.services.UserService;
-import com.msgnetconomy.shop.utils.PasswordUtils;
+import com.msgnetconomy.shop.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author nzorkic@netconomy.net
  */
 @Controller
-@RequestMapping("/login")
-public class LoginController {
+@RequestMapping("/registration")
+public class RegistrationController {
 
-    private static final String PRODUCTS_PAGE = "productList";
+    private static final String REGISTERED_SUCCESSFULLY = "User has been registered successfully";
     private static final String LOGIN_PAGE = "login";
+    private static final String REGISTRATION_PAGE = "registration";
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserValidator userValidator;
+
     @GetMapping
-    public ModelAndView showLogin() {
-        ModelAndView modelAndView = new ModelAndView(LOGIN_PAGE);
+    public ModelAndView register(ModelAndView modelAndView) {
+        modelAndView.addObject("user", new User());
+        modelAndView.setViewName(REGISTRATION_PAGE);
         return modelAndView;
     }
 
     @PostMapping
-    public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView modelAndView;
-        User user = userService.findUserByUsername("fsafsafsafsa");
-        if (PasswordUtils.verifyUserPassword("12345678", user.getPassword(), user.getSalt())) {
-            modelAndView = new ModelAndView(PRODUCTS_PAGE);
-            modelAndView.addObject("firstName", user.getFirstName());
+    public ModelAndView register(@ModelAttribute("user") User user, BindingResult bindingResult, ModelAndView modelAndView) {
+        userValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName(REGISTRATION_PAGE);
             return modelAndView;
         }
-        modelAndView = new ModelAndView(LOGIN_PAGE);
-        modelAndView.addObject("message", "Username or Password is wrong!!");
+        userService.saveUser(user);
+        modelAndView.addObject("successMessage", REGISTERED_SUCCESSFULLY);
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName(LOGIN_PAGE);
         return modelAndView;
     }
 
-    @GetMapping("/logout")
-    public String logout() {
-        return LOGIN_PAGE;
-    }
 }

@@ -6,8 +6,16 @@
 </head>
 <body>
 <h1>Guru Register Form</h1>
-<form:form action="login"  method="post">
+<form:form action="registration" modelAttribute="user" method="post">
     <table style="with: 50%">
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" name="firstName"/></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input type="text" name="lastName"/></td>
+        </tr>
         <tr>
             <td>UserName</td>
             <td><input type="text" name="username"/></td>
