@@ -41,7 +41,6 @@ import java.util.Optional;
 public class ProductListController {
 
     private static final String PRODUCT_LIST_PAGE = "productList";
-    private static final String CATEGORIES = "categories";
 
     @Autowired
     private ProductService productService;
@@ -54,7 +53,6 @@ public class ProductListController {
                               Model model) {
         Pageable pareRequest = PageProvider.createPageRequest(PageProvider.INITIAL_PAGE, PageProvider.PER_PAGE_DEFAULT);
         populateModelWithProducts(categoryCodes, model, pareRequest);
-        model.addAttribute(CATEGORIES, categoryService.getAllCategories());
         return PRODUCT_LIST_PAGE;
     }
 
@@ -64,7 +62,6 @@ public class ProductListController {
                                      Model model) {
         Pageable pareRequest = PageProvider.createPageRequest(pageNumber, PageProvider.PER_PAGE_DEFAULT);
         populateModelWithProducts(categoryCodes, model, pareRequest);
-        model.addAttribute(CATEGORIES, categoryService.getAllCategories());
         return PRODUCT_LIST_PAGE;
     }
 
@@ -77,5 +74,6 @@ public class ProductListController {
         }
         model.addAttribute("pages", products.getTotalPages());
         model.addAttribute("products", products.getContent());
+        model.addAttribute("categories", categoryService.getAllCategories());
     }
 }
