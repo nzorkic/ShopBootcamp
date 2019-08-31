@@ -25,12 +25,16 @@ import java.util.Optional;
  */
 public class PageProvider {
 
-    private static final int PER_PAGE_DEFAULT = 10;
-    private static final int INITIAL_PAGE = 0;
+    public static final int PER_PAGE_DEFAULT = 9;
+    public static final int INITIAL_PAGE = 0;
 
     public static Pageable createPageRequest(Optional<Integer> page, Integer perPage) {
         int currentPage = page.orElse(0) < 1 ? INITIAL_PAGE : page.get() - 1;
         int productsFerPage = perPage == null ? PER_PAGE_DEFAULT : perPage;
-        return PageRequest.of(currentPage, productsFerPage);
+        return createPageRequest(currentPage, productsFerPage);
+    }
+
+    public static Pageable createPageRequest(int page, int perPage) {
+        return PageRequest.of(page, perPage);
     }
 }
