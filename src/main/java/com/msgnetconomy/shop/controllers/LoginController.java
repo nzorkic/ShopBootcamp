@@ -17,12 +17,16 @@ package com.msgnetconomy.shop.controllers;
 
 import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.services.UserService;
+import com.msgnetconomy.shop.utils.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author nzorkic@netconomy.net
@@ -31,14 +35,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/login")
 public class LoginController {
 
-    private static final String PRODUCTS_PAGE = "products";
+    private static final String PRODUCTS_PAGE = "productList";
+    private static final String LOGIN_PAGE = "login";
 
     @Autowired
     private UserService userService;
 
     @GetMapping
-    public String login(@RequestBody User user, @PathVariable Long uid) {
-        userService.findByUserID(user, uid);
-        return PRODUCTS_PAGE;
+    public ModelAndView showLogin() {
+        ModelAndView modelAndView = new ModelAndView(LOGIN_PAGE);
+        return modelAndView;
+    }
+
+    @PostMapping
+    public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView modelAndView;
+        User user = userService.findUserByUsername("fsafsafsafsa");
+        if (PasswordUtils.verifyUserPassword("12345678", user.getPassword(), user.getSalt())) {
+            modelAndView = new ModelAndView(PRODUCTS_PAGE);
+            modelAndView.addObject("firstName", user.getFirstName());
+            return modelAndView;
+        }
+        modelAndView = new ModelAndView(LOGIN_PAGE);
+        modelAndView.addObject("message", "Username or Password is wrong!!");
+        return modelAndView;
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return LOGIN_PAGE;
     }
 }

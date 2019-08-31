@@ -16,9 +16,12 @@
 package com.msgnetconomy.shop.controllers;
 
 import com.msgnetconomy.shop.domain.User;
+import com.msgnetconomy.shop.exceptions.UserNotFoundException;
 import com.msgnetconomy.shop.services.UserService;
+import com.msgnetconomy.shop.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -33,14 +36,22 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("{uid}")
-    public String getUser(@PathVariable Long uid) {
-        userService.getUserByUserID(uid);
+    @Autowired
+    private UserValidator userValidator;
+
+    @GetMapping("{username}")
+    @ExceptionHandler(UserNotFoundException.class)
+    public String getUser(@PathVariable String username) {
+        userService.findUserByUsername(username);
         return USER_PAGE;
     }
 
     @PutMapping("{uid}")
-    public String updateUser(@RequestBody User user, @PathVariable Long uid) {
+    public String updateUser(@RequestBody User user, @PathVariable Long uid, BindingResult bindingResult) {
+        userValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            throw new UserNotFoundException(uid);
+        }
         userService.updateUser(user, uid);
         return USER_PAGE;
     }

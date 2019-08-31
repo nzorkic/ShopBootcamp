@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,13 +19,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public Optional<User> findByUserID(User user, Long uid) {
-        Optional<User> userdb = Optional.of(userRepository.getOne(uid));
-        AtomicBoolean passwordsMatch = new AtomicBoolean();
-        userdb.ifPresent(userData ->
-                passwordsMatch.set(PasswordUtils.verifyUserPassword(
-                        user.getPassword(), userData.getPassword(), userData.getSalt())));
-        return passwordsMatch.get() ? userdb : null;
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
     }
 
     @Override
@@ -36,11 +30,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encryptedPassword);
         user.setSalt(salt);
         return userRepository.save(user);
-    }
-
-    @Override
-    public User getUserByUserID(Long uid) {
-        return userRepository.getOne(uid);
     }
 
     @Override
