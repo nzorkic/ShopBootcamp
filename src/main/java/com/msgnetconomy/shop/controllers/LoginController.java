@@ -27,6 +27,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.LOGIN;
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.PRODUCTS;
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.REDIRECT_PREFIX;
@@ -52,18 +56,21 @@ public class LoginController {
     }
 
     @PostMapping
-    public String login(@ModelAttribute LoginForm loginForm, Model model) {
+    public String login(@ModelAttribute LoginForm loginForm, Model model, HttpServletRequest request, HttpServletResponse response) {
         User user = userService.findUserByUsername(loginForm.getUsername());
         boolean userVerified = PasswordUtils.verifyUserPassword(loginForm.getPassword(), user.getPassword(), user.getSalt());
         if (!userVerified) {
             model.addAttribute("errorMessage", "Username or Password is wrong!!");
             return LOGIN_PAGE_REDIRECT;
         }
+        HttpSession httpSession = request.getSession();
+        httpSession.setAttribute("user", user);
         return REDIRECT_PREFIX + PRODUCTS_PAGE;
     }
 
     @GetMapping("/logout")
-    public String logout() {
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
         return LOGIN_PAGE_REDIRECT;
     }
 }
