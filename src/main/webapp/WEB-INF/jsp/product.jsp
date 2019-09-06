@@ -4,7 +4,6 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link href="/css/main.css" rel="stylesheet" />
 </head>
 

@@ -30,15 +30,15 @@
                                 src="<%=request.getContextPath()%>/images/products/${product.image}" alt="" />
                             <div class="product__details">
                                 <h3 class="product__details-name">${product.name} | ${product.category.name}
-                                </h4>
-                                <p class="product__details-description">${product.description}</p>
-                                <p class="product__details-price">
-                                    ${product.price}
-                                </p>
-                                <p class="product__details-button">
-                                    <button class="product__details-button--confirm button button--cta"
-                                        type="button">Add to
-                                        cart</button>
+                                    </h4>
+                                    <p class="product__details-description">${product.description}</p>
+                                    <p class="product__details-price">
+                                        ${product.price}
+                                    </p>
+                                    <p class="product__details-button">
+                                        <button class="product__details-button--confirm button button--cta"
+                                            type="button">Add to
+                                            cart</button>
                             </div>
                         </div>
                     </c:forEach>
@@ -57,7 +57,6 @@
             </div>
         </div>
     </div>
-
     <jsp:include page="common/footer.jsp" />
 
     <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
