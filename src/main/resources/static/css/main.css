@@ -3,7 +3,7 @@ body {
 }
 
 * {
-    font-family: Tahoma, Geneva, sans-serif;
+    font-family: "Helvetica LT W01", "Helvetica Neue", Helvetica, Arial, sans-serif;
 } 
 
 .content {
@@ -15,7 +15,6 @@ body {
     margin-top: 100px;
     text-align: center;
 }
-
 
 .header {
     height: 100px;
