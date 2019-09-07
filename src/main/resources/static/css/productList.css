@@ -147,8 +147,15 @@ li a:after {
     vertical-align: top;
     background-color: #B4CDEB;
     overflow: hidden;
+    position: relative;
 }
-
+.product__sale {
+    position: absolute;
+    top: -3%;
+    left: 0%;
+    height: 125px;
+    z-index: 5;
+}
 .product__image {
     width: 100%;
     border-bottom: 2px solid #6F6F6F;

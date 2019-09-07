@@ -27,8 +27,11 @@
                 <div id="products">
                     <c:forEach items="${products}" var="product">
                         <div class="product">
+                            <img class="product__sale" src="<%=request.getContextPath()%>/images/sale.png"
+                            alt="sale logo">
+
                             <img class="product__image"
-                                 src="<%=request.getContextPath()%>/images/products/${product.image}" alt="" />
+                                 src="<%=request.getContextPath()%>/images/products/${product.image}" alt="Product image" />
                             <div class="product__details">
                                 <h3>${product.name} | ${product.category.name}</h3>
                                 <p class="product__details-description">${product.description}</p>
