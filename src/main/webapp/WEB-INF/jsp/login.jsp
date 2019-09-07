@@ -4,9 +4,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Guru Registration Form</title>
-    <link href="/css/main.css" rel="stylesheet"/>
-    <link href="/css/productList.css" rel="stylesheet"/>
+    <title>Login</title>
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/productList.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -14,6 +14,7 @@
 <div class=content>
     <h1 class="heading--bold">Guru Register Form</h1>
     <form:form action="login" method="post" class="form">
+        <h1 class="form__heading">Login form</h1>
         <div class="form__item">
             <label for="username" class="form__label">UserName</label>
             <input type="text" name="username" class="form__input" required/>
