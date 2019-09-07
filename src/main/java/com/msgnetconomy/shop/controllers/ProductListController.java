@@ -16,6 +16,7 @@
 package com.msgnetconomy.shop.controllers;
 
 import com.msgnetconomy.shop.domain.Product;
+import com.msgnetconomy.shop.forms.FilterForm;
 import com.msgnetconomy.shop.services.CategoryService;
 import com.msgnetconomy.shop.services.ProductService;
 import com.msgnetconomy.shop.utils.PageProvider;
@@ -24,13 +25,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.PRODUCTS;
@@ -49,31 +50,20 @@ public class ProductListController {
     private CategoryService categoryService;
 
     @GetMapping
-    public String getProducts(@RequestParam(value = "categories", required = false) List<Integer> categoryCodes,
+    public String getProducts(@ModelAttribute(value = "filterForm") FilterForm filterForm,
+                              @RequestParam(value = "page") Optional<Integer> pageNumber,
                               Model model) {
-        Pageable pareRequest = PageProvider.createPageRequest(PageProvider.INITIAL_PAGE, PageProvider.PER_PAGE_DEFAULT);
-        populateModelWithProducts(categoryCodes, model, pareRequest);
-        return PRODUCTS;
-    }
-
-    @GetMapping(path = "/page/{pageNumber}")
-    public String getProductsForPage(@RequestParam(value = "categories", required = false) List<Integer> categoryCodes,
-                                     @PathVariable(value = "pageNumber") Optional<Integer> pageNumber,
-                                     Model model) {
-        Pageable pareRequest = PageProvider.createPageRequest(pageNumber, PageProvider.PER_PAGE_DEFAULT);
-        populateModelWithProducts(categoryCodes, model, pareRequest);
-        return PRODUCTS;
-    }
-
-    private void populateModelWithProducts(List<Integer> categoryCodes, Model model, Pageable pareRequest) {
         Page<Product> products;
-        if (CollectionUtils.isEmpty(categoryCodes)) {
-            products = productService.getAllProductsForPage(pareRequest);
+        Pageable pageRequest = PageProvider.createPageRequest(pageNumber, PageProvider.PER_PAGE_DEFAULT, filterForm);
+        List<Integer> categoryCodes = filterForm.getCategories();
+        if (Objects.isNull(categoryCodes)) {
+            products = productService.getAllProductsForPage(pageRequest);
         } else {
-            products = productService.getAllProductsForPageByCategories(categoryCodes, pareRequest);
+            products = productService.getAllCategorizedProducts(categoryCodes, pageRequest);
         }
         model.addAttribute("pages", products.getTotalPages());
         model.addAttribute("products", products.getContent());
         model.addAttribute("categories", categoryService.getAllCategories());
+        return PRODUCTS;
     }
 }

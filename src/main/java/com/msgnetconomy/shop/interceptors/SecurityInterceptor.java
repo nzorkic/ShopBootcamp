@@ -33,7 +33,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
         throws Exception {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if (user == null) {
+        if (user == null && !response.isCommitted()) {
             response.sendRedirect("/login");
         }
     }

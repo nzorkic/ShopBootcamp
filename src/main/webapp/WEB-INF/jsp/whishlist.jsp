@@ -1,1 +1,0 @@
-<p>Whishlist page</p>

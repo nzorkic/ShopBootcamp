@@ -30,5 +30,5 @@ public interface ProductService {
 
     Product getProductByCode(int code);
 
-    Page<Product> getAllProductsForPageByCategories(List<Integer> codes, Pageable pareRequest);
+    Page<Product> getAllCategorizedProducts(List<Integer> categoryCodes, Pageable pareRequest);
 }
