@@ -12,7 +12,6 @@
 <body>
 <jsp:include page="common/header.jsp"/>
 <div class=content>
-    <h1 class="heading--bold">Guru Register Form</h1>
     <form:form action="login" method="post" class="form">
         <h1 class="form__heading">Login form</h1>
         <div class="form__item">
