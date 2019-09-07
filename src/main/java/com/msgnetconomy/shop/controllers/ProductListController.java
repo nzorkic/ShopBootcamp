@@ -34,6 +34,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.PRODUCTS;
 
 /**
@@ -52,7 +54,7 @@ public class ProductListController {
     @GetMapping
     public String getProducts(@ModelAttribute(value = "filterForm") FilterForm filterForm,
                               @RequestParam(value = "page") Optional<Integer> pageNumber,
-                              Model model) {
+                              Model model, HttpServletRequest request) {
         Page<Product> products;
         Pageable pageRequest = PageProvider.createPageRequest(pageNumber, PageProvider.PER_PAGE_DEFAULT, filterForm);
         List<Integer> categoryCodes = filterForm.getCategories();
@@ -64,6 +66,7 @@ public class ProductListController {
         model.addAttribute("pages", products.getTotalPages());
         model.addAttribute("products", products.getContent());
         model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("user", request.getSession().getAttribute("user"));
         return PRODUCTS;
     }
 }
