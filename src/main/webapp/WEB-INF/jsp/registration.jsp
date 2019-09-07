@@ -33,7 +33,7 @@
                 <input type="password" name="password" class="form__item-input" required/>
             </div>
             <a href="/login">Login ></a>
-            <input type="submit" value="Submit" class="form__button" />
+            <input type="submit" value="Register" class="form__button" />
         </form:form>
         <c:if test="${errorMessage != null}">
             <div class="form__error">${errorMessage}</div>
