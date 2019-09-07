@@ -68,6 +68,7 @@ public class RegistrationController {
             redirectAttributes.addAttribute("errorMessage", ErrorUtils.getErrorMessage(bindingResult));
             return REDIRECT_PREFIX + REGISTRATION_PAGE;
         }
+        user.setImage("user_placeholder.png");
         userService.saveUser(user);
         model.addAttribute("successMessage", REGISTERED_SUCCESSFULLY);
         model.addAttribute("user", user);

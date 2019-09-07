@@ -66,7 +66,6 @@ public class ProductListController {
         model.addAttribute("pages", products.getTotalPages());
         model.addAttribute("products", products.getContent());
         model.addAttribute("categories", categoryService.getAllCategories());
-        model.addAttribute("user", request.getSession().getAttribute("user"));
         return PRODUCTS;
     }
 }
