@@ -39,8 +39,9 @@
                 <div id="products">
                     <c:forEach items="${products}" var="product">
                         <div class="product">
-                            <img class="product__image"
+                            <a href="/product/${product.code}"><img class="product__image"
                                  src="<%=request.getContextPath()%>/images/products/${product.image}" alt=""/>
+                            </a>
                             <div class="product__details">
                                 <h3 class="product__details-name">${product.name} | ${product.category.name}
                                     <p class="product__details-description">${product.description}</p>

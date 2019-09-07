@@ -5,5 +5,7 @@
         <a href="/cart">Cart</a>
         <a href="/logout">Logout</a>
     </c:if>
-    <img src="<%=request.getContextPath()%>/images/logo.png" alt="msgNetconomy logo" class="header__image">
+    <a href="/products">
+        <img src="<%=request.getContextPath()%>/images/logo.png" alt="msgNetconomy logo" class="header__image">
+    </a>
 </header>
