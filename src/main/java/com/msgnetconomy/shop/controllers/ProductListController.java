@@ -54,7 +54,7 @@ public class ProductListController {
     @GetMapping
     public String getProducts(@ModelAttribute(value = "filterForm") FilterForm filterForm,
                               @RequestParam(value = "page") Optional<Integer> pageNumber,
-                              Model model, HttpServletRequest request) {
+                              Model model) {
         Page<Product> products;
         Pageable pageRequest = PageProvider.createPageRequest(pageNumber, PageProvider.PER_PAGE_DEFAULT, filterForm);
         List<Integer> categoryCodes = filterForm.getCategories();
