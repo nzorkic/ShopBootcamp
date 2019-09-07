@@ -16,7 +16,7 @@
     <form:form action="login" method="post" class="form">
         <h1 class="form__heading">Login form</h1>
         <div class="form__item">
-            <label for="username" class="form__label">UserName</label>
+            <label for="username" class="form__label">Username</label>
             <input type="text" name="username" class="form__input" required/>
         </div>
         <div class="form__item">
