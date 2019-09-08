@@ -7,17 +7,17 @@
             </div>
         </a>
         <a href="/cart">
-            <div class="header__item header__item-link">
+            <div class="header__item header__item-link header__item--fixed">
                 <span>Cart</span>
             </div>
         </a>
         <a href="/products">
-            <div class="header__item header__item-link">
+            <div class="header__item header__item-link header__item--fixed">
                 <span>Product List</span>
             </div>
         </a>
         <a href="/logout">
-            <div class="header__item header__item-link">
+            <div class="header__item header__item-link header__item--fixed">
                 <span>Logout</span>
             </div>
         </a>
