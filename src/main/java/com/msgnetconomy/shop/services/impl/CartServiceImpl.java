@@ -77,8 +77,11 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartEntry> getCartEntries(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        Cart cart = user.getCart();
-        return Objects.isNull(cart) ? new ArrayList<>() : cartEntryRepository.findAllByCart(cart);
+        if (Objects.nonNull(user)) {
+            Cart cart = user.getCart();
+            return Objects.isNull(cart) ? new ArrayList<>() : cartEntryRepository.findAllByCart(cart);
+        }
+        return new ArrayList<>();
     }
 
     @Override
