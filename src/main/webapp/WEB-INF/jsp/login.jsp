@@ -22,8 +22,8 @@
             <label for="password" class="form__item-label">Password</label>
             <input type="password" name="password" class="form__item-input" required/>
         </div>
-        <input type="submit" value="Sign in" class="form__button"/>
-        <input type="button" onclick="location.href='/registration';" value="Registration" class="form__button"/>
+        <input type="submit" value="Sign in" class="form__button form__button--blue"/>
+        <input type="button" onclick="location.href='/registration';" value="Registration" class="form__button form__button--blue"/>
     </form:form>
     <c:if test="${errorMessage != null}">
         <div class="form__error">${errorMessage}</div>
