@@ -16,14 +16,16 @@
             <p>Product Name: ${item.product.name}</p>
             <p>Qty: ${item.quantity}</p>
             <p>Price: ${item.quantity * item.product.price} RSD</p>
-            <input type="submit" value="X">
+            <input type="submit" value="Remove Item">
         </form:form>
 
     </c:forEach>
     <h2>Total: ${total}</h2>
-    <form:form action="/cart/purchase" method="post">
-        <input type="submit" value="Make Order">
-    </form:form>
+    <c:if test="${total gt 0}">
+        <form:form action="/cart/purchase" method="post">
+            <input type="submit" value="Make Order">
+        </form:form>
+    </c:if>
 </div>
 <jsp:include page="common/footer.jsp"/>
 </body>

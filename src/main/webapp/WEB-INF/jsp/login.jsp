@@ -26,7 +26,12 @@
             <input type="password" name="password" class="form__item-input" required/>
         </div>
         <input type="submit" value="Sign in" class="form__button form__button--blue"/>
-        <input type="button" onclick="location.href='/registration';" value="Registration" class="form__button form__button--blue"/>
+        <div class="form__delimiter--div">
+          <span class="form__delimiter--span">
+            OR
+          </span>
+        </div>
+        <input type="button" onclick="location.href='/registration';" value="Register" class="form__button form__button--blue"/>
     </form:form>
 </div>
 <jsp:include page="common/footer.jsp"/>

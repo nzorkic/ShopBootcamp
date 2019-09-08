@@ -47,12 +47,12 @@
                     <label for="${category.name}" class="form__item-label">${category.name}</label>
                 </div>
             </c:forEach>
-            <select name="nameSort" class="form__item-select>
+            <select name="nameSort" class="form__item-select">
                 <option value="" selected disabled>Name...</option>
                 <option value="ASC">Ascending</option>
                 <option value="DESC">Descending</option>
             </select>
-            <select name="priceSort" class="form__item-select>
+            <select name="priceSort" class="form__item-select">
                 <option value="" selected disabled>Price...</option>
                 <option value="ASC">Ascending</option>
                 <option value="DESC">Descending</option>
