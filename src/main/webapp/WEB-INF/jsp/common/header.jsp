@@ -5,6 +5,9 @@
             Hello, <a href="/user/${user.username}">${user.username}</a>
         </div>
         <div class="header__item header__item-link">
+            <a href="/products">Products</a>
+        </div>
+        <div class="header__item header__item-link">
             <a href="/cart">Cart</a>
         </div>
         <div class="header__item header__item-link">

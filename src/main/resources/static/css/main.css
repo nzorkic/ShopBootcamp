@@ -112,8 +112,11 @@ body {
 }
 
 .form__item-select {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 10px;
+    border-radius: 26px;
+    width: 150px;
+    padding-left: 10px;
 }
 
 .form__button {
@@ -121,7 +124,7 @@ body {
     height: 48px;
     font-size: 20px;
     border-radius: 26px;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .form__button--blue {
@@ -164,4 +167,5 @@ body {
     color: #ffffff;
     font-size: 20px;
 }
+
 
