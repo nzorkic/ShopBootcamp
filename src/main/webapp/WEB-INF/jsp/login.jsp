@@ -5,8 +5,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Login</title>
-    <link href="/css/main.css" rel="stylesheet" />
-    <link href="/css/productList.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet"/>
+    <link href="/css/productList.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -15,15 +15,15 @@
     <form:form action="login" method="post" class="form">
         <h1 class="form__heading">Login form</h1>
         <div class="form__item">
-            <label for="username" class="form__label">Username</label>
-            <input type="text" name="username" class="form__input" required/>
+            <label for="username" class="form__item-label">Username</label>
+            <input type="text" name="username" class="form__item-input" required/>
         </div>
         <div class="form__item">
-            <label for="password" class="form__label">Password</label>
-            <input type="password" name="password" class="form__input" required/>
+            <label for="password" class="form__item-label">Password</label>
+            <input type="password" name="password" class="form__item-input" required/>
         </div>
-        <input type="submit" value="Sign in" class="button button--cta form__button"/>
-        <a href="/registration">Registration ></a>
+        <input type="submit" value="Sign in" class="form__button"/>
+        <input type="button" onclick="location.href='/registration';" value="Registration" class="form__button"/>
     </form:form>
     <c:if test="${errorMessage != null}">
         <div class="form__error">${errorMessage}</div>
