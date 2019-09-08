@@ -131,7 +131,7 @@ body {
     border: 1px solid lightgrey;
 }
 
-.form__item-input:focus {
+.form__item-input:focus, .form__item-input:active {
     outline: none;
 }
 
@@ -179,5 +179,13 @@ body {
 
 .user__details {
     font-size: 18px;
+}
+
+.form__error {
+    display: block;
+    padding: 15px;
+    background-color: indianred;
+    color: white;
+    font-size: 20px;
 }
 
