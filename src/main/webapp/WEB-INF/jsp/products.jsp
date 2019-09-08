@@ -10,11 +10,11 @@
 </head>
 
 <body>
-    <jsp:include page="common/header.jsp" />
-    <div class="content">
-        <form:form method="get" modelAttribute="filterForm" action="products">
+<jsp:include page="common/header.jsp"/>
+<div class="content">
+    <form:form method="get" modelAttribute="filterForm" action="products">
         <div class="products-wrapper">
-            <div class="product__filter">
+            <div class="product-filter">
                 <h3>Search preferences</h3>
                 <hr>
                 <h4>Category</h4>
@@ -34,18 +34,18 @@
                     <option value="ASC">Ascending</option>
                     <option value="DESC">Descending</option>
                 </select>
-                <input type="submit" value="Filter">
+                <input type="submit" value="Filter" class="form__button form__button--white">
             </div>
             <div class="product-list">
                 <div id="products">
                     <c:forEach items="${products}" var="product">
                         <div class="product">
                             <img class="product__sale" src="<%=request.getContextPath()%>/images/sale.png"
-                            alt="sale logo">
+                                 alt="sale logo">
 
                             <a href="/product/${product.code}">
                                 <img class="product__image"
-                                 src="<%=request.getContextPath()%>/images/products/${product.image}" alt="Product image" />
+                                     src="<%=request.getContextPath()%>/images/products/${product.image}" alt="Product image"/>
                             </a>
                             <div class="product__details">
                                 <h3>${product.name} | ${product.category.name}</h3>
