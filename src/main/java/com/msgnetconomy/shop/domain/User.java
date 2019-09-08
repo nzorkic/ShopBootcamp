@@ -40,7 +40,7 @@ public class User {
     private Cart cart;
 
     @Id
-    @Column(name = "uid", nullable = false)
+    @Column(name = "uid")
     public long getUid() {
         return uid;
     }
@@ -50,7 +50,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -60,7 +60,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
@@ -70,7 +70,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "username", nullable = false)
+    @Column(name = "username")
     public String getUsername() {
         return username;
     }
@@ -80,7 +80,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -90,7 +90,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "salt", nullable = false)
+    @Column(name = "salt")
     public String getSalt() {
         return salt;
     }

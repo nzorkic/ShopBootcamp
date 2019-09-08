@@ -12,60 +12,62 @@
 <body>
 <jsp:include page="common/header.jsp"/>
 <div class="content">
-    <form:form method="get" modelAttribute="filterForm" action="products">
-        <div class="products-wrapper">
-            <div class="product-filter">
-                <h3>Search preferences</h3>
-                <hr>
-                <h4>Category</h4>
-                <c:forEach items="${categories}" var="category">
-                    <div class="form__item">
-                        <input type="checkbox" name="categories" value="${category.code}" id="${category.name}">
-                        <label for="${category.name}">${category.name}</label>
+    <div class="products-wrapper">
+        <div class="product-list">
+            <div id="products">
+                <c:forEach items="${products}" var="product">
+                    <div class="product" style="height: 600px">
+                        <img class="product__sale" src="<%=request.getContextPath()%>/images/sale.png"
+                             alt="sale logo">
+
+                        <a href="/product/${product.code}">
+                            <img class="product__image"
+                                 src="<%=request.getContextPath()%>/images/products/${product.image}" alt="Product image"/>
+                        </a>
+                        <div class="product__details">
+                            <h3>${product.name} | ${product.category.name}</h3>
+                            <p style="height: 90px; overflow: hidden;" class="product__details-description">${product.description}</p>
+                            <p class="product__details-price">${product.price} RSD</p>
+                            <form:form method="post" action="/cart/add/${product.code}">
+                                <button class="product__details-button" type="submit">Add to cart</button>
+                            </form:form>
+                        </div>
                     </div>
                 </c:forEach>
-                <select name="nameSort">
-                    <option value="" selected disabled>Name...</option>
-                    <option value="ASC">Ascending</option>
-                    <option value="DESC">Descending</option>
-                </select>
-                <select name="priceSort">
-                    <option value="" selected disabled>Price...</option>
-                    <option value="ASC">Ascending</option>
-                    <option value="DESC">Descending</option>
-                </select>
-                <input type="submit" value="Filter" class="form__button form__button--white">
             </div>
-            <div class="product-list">
-                <div id="products">
-                    <c:forEach items="${products}" var="product">
-                        <div class="product">
-                            <img class="product__sale" src="<%=request.getContextPath()%>/images/sale.png"
-                                 alt="sale logo">
-
-                            <a href="/product/${product.code}">
-                                <img class="product__image"
-                                     src="<%=request.getContextPath()%>/images/products/${product.image}" alt="Product image"/>
-                            </a>
-                            <div class="product__details">
-                                <h3>${product.name} | ${product.category.name}</h3>
-                                <p class="product__details-description">${product.description}</p>
-                                <p class="product__details-price">${product.price}</p>
-                                <button class="product__details-button" type="button">Add to cart</button>
-                            </div>
-                        </div>
-                    </c:forEach>
+        </div>
+        <div class="product-filter">
+            <h3>Search preferences</h3>
+            <hr>
+            <h4>Category</h4>
+            <form:form method="get" modelAttribute="filterForm" action="products">
+            <c:forEach items="${categories}" var="category">
+                <div class="form__item">
+                    <input type="checkbox" name="categories" value="${category.code}" id="${category.name}">
+                    <label for="${category.name}">${category.name}</label>
                 </div>
-            </div>
+            </c:forEach>
+            <select name="nameSort">
+                <option value="" selected disabled>Name...</option>
+                <option value="ASC">Ascending</option>
+                <option value="DESC">Descending</option>
+            </select>
+            <select name="priceSort">
+                <option value="" selected disabled>Price...</option>
+                <option value="ASC">Ascending</option>
+                <option value="DESC">Descending</option>
+            </select>
+            <input type="submit" value="Filter" class="form__button form__button--white">
         </div>
-        <div class="page-container middle">
-            <div class="pagination">
-                <c:forEach begin="1" end="${pages}" varStatus="loop">
-                    <button name="page" value="${loop.index}" type="submit">Page ${loop.index}</button>
-                </c:forEach>
-            </div>
+    </div>
+    <div class="page-container middle">
+        <div class="pagination">
+            <c:forEach begin="1" end="${pages}" varStatus="loop">
+                <button name="page" value="${loop.index}" type="submit">Page ${loop.index}</button>
+            </c:forEach>
+            </form:form>
         </div>
-    </form:form>
+    </div>
 </div>
 <jsp:include page="common/footer.jsp"/>
 

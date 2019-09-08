@@ -7,7 +7,5 @@ public interface UserService {
 
     User findUserByUsername(String username);
 
-    User saveUser(User user);
-
-    ResponseEntity<User> updateUser(User user, Long uid);
+    User createUser(User user);
 }

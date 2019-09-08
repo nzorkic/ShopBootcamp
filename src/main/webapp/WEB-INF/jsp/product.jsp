@@ -31,6 +31,7 @@
                     </span>
                     </p>
                 </div>
+                <button class="product__details-button" type="button">Add to cart</button>
             </div>
         </div>
     </div>

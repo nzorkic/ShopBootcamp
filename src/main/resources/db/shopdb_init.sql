@@ -12,7 +12,8 @@ DROP TABLE IF EXISTS category;
 
 CREATE TABLE cart
 (
-    code VARCHAR(45) NOT NULL,
+    code  INT(11) NOT NULL AUTO_INCREMENT,
+    total DOUBLE DEFAULT 0.0,
     PRIMARY KEY (code)
 );
 CREATE TABLE category
@@ -23,7 +24,7 @@ CREATE TABLE category
 );
 CREATE TABLE product
 (
-    code          INT(11)      NOT NULL,
+    code          INT(11)      NOT NULL AUTO_INCREMENT,
     name          VARCHAR(255) NOT NULL,
     description   VARCHAR(255) NOT NULL,
     image         VARCHAR(255) NOT NULL,
@@ -31,17 +32,17 @@ CREATE TABLE product
     category_code INT(11)      NOT NULL,
     quantity      INT(11)      NOT NULL,
     PRIMARY KEY (code),
-    CONSTRAINT fk_category_for_product FOREIGN KEY (category_code) REFERENCES category (code) ON DELETE NO ACTION ON UPDATE NO ACTION
+    CONSTRAINT fk_category_for_product FOREIGN KEY (category_code) REFERENCES category (code)
 );
 CREATE TABLE cart_entry
 (
-    code         VARCHAR(45) NOT NULL,
-    quantity     DOUBLE      NOT NULL,
-    product_code INT(11)     NOT NULL,
-    cart_code    VARCHAR(45) NOT NULL,
+    code         INT(11) NOT NULL AUTO_INCREMENT,
+    quantity     INT(11) NOT NULL,
+    product_code INT(11) NOT NULL,
+    cart_code    INT(11) NOT NULL,
     PRIMARY KEY (code),
-    CONSTRAINT fk_products_in_cart_product FOREIGN KEY (product_code) REFERENCES product (code) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT fk_products_in_cart_cart1 FOREIGN KEY (cart_code) REFERENCES cart (code) ON DELETE NO ACTION ON UPDATE NO ACTION
+    CONSTRAINT fk_products_in_cart_product FOREIGN KEY (product_code) REFERENCES product (code),
+    CONSTRAINT fk_products_in_cart_cart1 FOREIGN KEY (cart_code) REFERENCES cart (code)
 );
 CREATE TABLE user
 (
@@ -52,9 +53,9 @@ CREATE TABLE user
     password   VARCHAR(255) NOT NULL,
     salt       VARCHAR(45)  NOT NULL,
     image      VARCHAR(255) DEFAULT NULL,
-    cart_code  VARCHAR(45)  DEFAULT NULL,
+    cart_code  INT(11)      DEFAULT NULL,
     PRIMARY KEY (uid),
-    CONSTRAINT fk_cart_for_user FOREIGN KEY (cart_code) REFERENCES cart (code) ON DELETE NO ACTION ON UPDATE NO ACTION
+    CONSTRAINT fk_cart_for_user FOREIGN KEY (cart_code) REFERENCES cart (code) ON DELETE CASCADE
 );
 
 INSERT INTO `category`

@@ -19,6 +19,8 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -27,21 +29,27 @@ import javax.persistence.Id;
 @Entity
 public class Cart {
 
-    private String code;
+    private int code;
+    private double total;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "code")
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(code);
+    @Column(name = "total")
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     @Override
@@ -53,6 +61,12 @@ public class Cart {
             return false;
         }
         Cart cart = (Cart) o;
-        return Objects.equals(code, cart.code);
+        return code == cart.code &&
+            Double.compare(cart.total, total) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(code, total);
     }
 }

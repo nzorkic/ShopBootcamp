@@ -8,6 +8,9 @@
             <a href="/cart">Cart</a>
         </div>
         <div class="header__item header__item-link">
+            <a href="/products">Product List</a>
+        </div>
+        <div class="header__item header__item-link">
             <a href="/logout">Logout</a>
         </div>
     </c:if>

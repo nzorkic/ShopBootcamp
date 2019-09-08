@@ -30,7 +30,7 @@ import java.util.Optional;
  */
 public class PageProvider {
 
-    public static final int PER_PAGE_DEFAULT = 9;
+    public static final int PER_PAGE_DEFAULT = 12;
 
     private static final int INITIAL_PAGE = 0;
     private static final String ASC = "ASC";
