@@ -8,11 +8,16 @@
 
 <body>
 <jsp:include page="common/header.jsp"/>
-<p>User page</p>
-
-<img src="<%=request.getContextPath()%>/images/users/${user.image}"> <br>
-${user.firstName} ${user.lastName} <br>
-${user.username} <br>
+<div class="content">
+    <div class="user">
+        <img src="<%=request.getContextPath()%>/images/users/${user.image}" class="user__image">
+        <div class="user__image">
+            <h1>${user.username}</h1>
+            <p class="user__details">First name: ${user.firstName}</p>
+            <p class="user__details">Last name: ${user.lastName}</p>
+        </div>
+    </div>
+</div>
 <jsp:include page="common/footer.jsp"/>
 </body>
 </html>
