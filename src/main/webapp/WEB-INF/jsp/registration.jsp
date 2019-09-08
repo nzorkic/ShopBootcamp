@@ -14,6 +14,9 @@
 <body>
 <jsp:include page="common/header.jsp"/>
 <div class="content">
+    <c:if test="${errorMessage != null}">
+        <div class="form__error">${errorMessage}</div>
+    </c:if>
     <form:form action="registration" method="post" class="form">
         <h1 class="form__heading">Register Form</h1>
         <div class="form__item">
@@ -35,9 +38,6 @@
         <input type="button" onclick="location.href='/login';" value="Login" class="form__button form__button--blue"/>
         <input type="submit" value="Register" class="form__button form__button--blue"/>
     </form:form>
-    <c:if test="${errorMessage != null}">
-        <div class="form__error">${errorMessage}</div>
-    </c:if>
 </div>
 <jsp:include page="common/footer.jsp"/>
 
