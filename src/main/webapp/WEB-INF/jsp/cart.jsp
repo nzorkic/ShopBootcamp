@@ -8,7 +8,9 @@
 
 <body>
 <jsp:include page="common/header.jsp"/>
-<p>Cart page</p>
+<div class="content">
+
+</div>
 <jsp:include page="common/footer.jsp"/>
 </body>
 </html>
