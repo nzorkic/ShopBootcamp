@@ -20,16 +20,16 @@
                 <h4>Category</h4>
                 <c:forEach items="${categories}" var="category">
                     <div class="form__item">
-                        <input type="checkbox" name="categories" value="${category.code}" id="${category.name}">
-                        <label for="${category.name}">${category.name}</label>
+                        <input type="checkbox" name="categories" value="${category.code}" id="${category.name}" class="form__item-checkbox">
+                        <label for="${category.name}" class="form__item-label">${category.name}</label>
                     </div>
                 </c:forEach>
-                <select name="nameSort">
+                <select name="nameSort" class="form__item-select">
                     <option value="" selected disabled>Name...</option>
                     <option value="ASC">Ascending</option>
                     <option value="DESC">Descending</option>
                 </select>
-                <select name="priceSort">
+                <select name="priceSort" class="form__item-select">
                     <option value="" selected disabled>Price...</option>
                     <option value="ASC">Ascending</option>
                     <option value="DESC">Descending</option>
@@ -56,13 +56,13 @@
                         </div>
                     </c:forEach>
                 </div>
-            </div>
-        </div>
-        <div class="page-container middle">
-            <div class="pagination">
-                <c:forEach begin="1" end="${pages}" varStatus="loop">
-                    <button name="page" value="${loop.index}" type="submit">Page ${loop.index}</button>
-                </c:forEach>
+                <div class="page-container middle">
+                    <div class="pagination">
+                        <c:forEach begin="1" end="${pages}" varStatus="loop">
+                            <button name="page" value="${loop.index}" type="submit">Page ${loop.index}</button>
+                        </c:forEach>
+                    </div>
+                </div>
             </div>
         </div>
     </form:form>
@@ -71,8 +71,7 @@
 
 <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="/js/home.js"></script>
-<script type="text/javascript" src="/js/priductList.js"></script>
+<script type="text/javascript" src="/js/productList.js"></script>
 
 </body>
 
