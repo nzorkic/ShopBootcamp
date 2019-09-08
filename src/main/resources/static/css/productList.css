@@ -149,14 +149,13 @@ li a:after {
 
 .products-wrapper {
     display: flex;
-
 }
 
 .product-filter {
     text-align: left;
     background-color: #1685C5;
     padding: 25px;
-    color: white;
+    color: #ffffff;
     width: 20%;
 }
 
@@ -204,7 +203,7 @@ li a:after {
     height: 48px;
     width: 70%;
     font-size: 20px;
-    color: white;
+    color: #ffffff;
     background-color: #1685C5;
     border: 1px solid #1685C5;
 }
@@ -215,5 +214,5 @@ li a:after {
 
 .product__details-button:hover {
     cursor: pointer;
-    box-shadow: 0 2px 5px white;
+    box-shadow: 0 2px 5px #ffffff;
 }
