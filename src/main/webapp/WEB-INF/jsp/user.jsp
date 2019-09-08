@@ -10,7 +10,7 @@
 <jsp:include page="common/header.jsp"/>
 <div class="content">
     <div class="user">
-        <img src="<%=request.getContextPath()%>/images/users/${user.image}" class="user__image">
+        <img src="<%=request.getContextPath()%>/images/users/${user.image}" class="user__image" alt="User image">
         <div class="user__image">
             <h1>${user.username}</h1>
             <p class="user__details">First name: ${user.firstName}</p>
