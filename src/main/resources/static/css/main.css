@@ -156,3 +156,19 @@ body {
     cursor: pointer;
 }
 
+.user {
+    width: 400px;
+    margin: 40px auto 0 auto;
+    border: 2px solid #1685C5;
+    border-radius: 26px;
+    overflow: hidden;
+}
+
+.user__image {
+    width: 100%;
+}
+
+.user__details {
+    font-size: 18px;
+}
+
