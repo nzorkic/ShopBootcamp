@@ -49,7 +49,7 @@ body {
     text-decoration: none;
 }
 
-.header__item:hover, .header__item:hover a {
+.header__item-link:hover, .header__item-link:hover a {
     background-color: #1685C5;
     color: white;
 }
