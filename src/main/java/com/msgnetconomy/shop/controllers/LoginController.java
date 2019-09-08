@@ -18,6 +18,7 @@ package com.msgnetconomy.shop.controllers;
 import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.forms.LoginForm;
 import com.msgnetconomy.shop.services.UserService;
+import com.msgnetconomy.shop.utils.ErrorUtils;
 import com.msgnetconomy.shop.utils.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Objects;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.LOGIN;
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.PRODUCTS;
@@ -40,30 +48,33 @@ import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.SL
 public class LoginController {
 
     private static final String PRODUCTS_PAGE = SLASH + PRODUCTS;
-    private static final String LOGIN_PAGE = SLASH + LOGIN;
-    private static final String LOGIN_PAGE_REDIRECT = REDIRECT_PREFIX + LOGIN_PAGE;
 
     @Autowired
     private UserService userService;
 
     @GetMapping
-    public String showLogin() {
+    public String showLogin(@RequestParam(value = "errorMessage", required = false) String errorMessage, Model model) {
+        model.addAttribute("errorMessage", errorMessage);
         return LOGIN;
     }
 
     @PostMapping
-    public String login(@ModelAttribute LoginForm loginForm, Model model) {
-        User user = userService.findUserByUsername(loginForm.getUsername());
-        boolean userVerified = PasswordUtils.verifyUserPassword(loginForm.getPassword(), user.getPassword(), user.getSalt());
-        if (!userVerified) {
-            model.addAttribute("errorMessage", "Username or Password is wrong!!");
-            return LOGIN_PAGE_REDIRECT;
-        }
-        return REDIRECT_PREFIX + PRODUCTS_PAGE;
-    }
+    public String login(@ModelAttribute LoginForm loginForm, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
-    @GetMapping("/logout")
-    public String logout() {
-        return LOGIN_PAGE_REDIRECT;
+        User user = userService.findUserByUsername(loginForm.getUsername());
+
+        if (Objects.isNull(user)) {
+            return ErrorUtils.createMessageAndRedirect(redirectAttributes, LOGIN, "User does not exist.");
+        }
+
+        boolean userVerified = PasswordUtils.verifyUserPassword(loginForm.getPassword(), user.getPassword(), user.getSalt());
+
+        if (!userVerified) {
+            return ErrorUtils.createMessageAndRedirect(redirectAttributes, LOGIN, "Wrong password.");
+        }
+
+        HttpSession httpSession = request.getSession();
+        httpSession.setAttribute("user", user);
+        return REDIRECT_PREFIX + PRODUCTS_PAGE;
     }
 }

@@ -13,7 +13,7 @@ import java.util.Objects;
 @Component
 public class UserValidator implements Validator {
 
-    private static final String USERNAME_EXISTS = "There is already a user registered with the username provided";
+    private static final String USERNAME_EXISTS = "There is already a user registered with that username.";
     private static final String USERNAME_SIZE = "Username must contains more than 6 characters, less than 32 characters";
     private static final String PASSWORD_SIZE = "Password must contains more than 8 characters, less than 32 characters";
 

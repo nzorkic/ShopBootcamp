@@ -17,6 +17,7 @@ package com.msgnetconomy.shop.controllers;
 
 import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.services.UserService;
+import com.msgnetconomy.shop.utils.ErrorUtils;
 import com.msgnetconomy.shop.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.LOGIN;
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.REGISTRATION;
@@ -50,16 +53,22 @@ public class RegistrationController {
     private UserValidator userValidator;
 
     @GetMapping
-    public String register() {
+    public String register(@RequestParam(value = "errorMessage", required = false) String errorMessage, Model model) {
+        model.addAttribute("errorMessage", errorMessage);
         return REGISTRATION;
     }
 
     @PostMapping
-    public String register(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+    public String register(@ModelAttribute("user") User user,
+                           BindingResult bindingResult,
+                           Model model,
+                           RedirectAttributes redirectAttributes) {
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
+            redirectAttributes.addAttribute("errorMessage", ErrorUtils.getErrorMessage(bindingResult));
             return REDIRECT_PREFIX + REGISTRATION_PAGE;
         }
+        user.setImage("user_placeholder.png");
         userService.saveUser(user);
         model.addAttribute("successMessage", REGISTERED_SUCCESSFULLY);
         model.addAttribute("user", user);

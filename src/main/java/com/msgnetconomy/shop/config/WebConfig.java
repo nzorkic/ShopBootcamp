@@ -13,22 +13,21 @@
  * (c) 2019 by NETCONOMY Software & Consulting GmbH
  *********************************************************************/
 
-package com.msgnetconomy.shop.controllers;
+package com.msgnetconomy.shop.config;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.msgnetconomy.shop.interceptors.SecurityInterceptor;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author nzorkic@netconomy.net
  */
-@Controller
-@RequestMapping("/whishlist")
-public class WhishlistController {
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
 
-    @GetMapping
-    public String getWhishlist(Model model) {
-        return "whishlist";
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new SecurityInterceptor()).excludePathPatterns("/login", "/registration");
     }
 }

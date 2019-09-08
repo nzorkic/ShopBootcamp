@@ -13,22 +13,26 @@
  * (c) 2019 by NETCONOMY Software & Consulting GmbH
  *********************************************************************/
 
-package com.msgnetconomy.shop.services;
+package com.msgnetconomy.shop.controllers;
 
-import com.msgnetconomy.shop.domain.Product;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.LOGIN;
 
 /**
  * @author nzorkic@netconomy.net
  */
-public interface ProductService {
+@Controller
+@RequestMapping("/logout")
+public class LogoutController {
 
-    Page<Product> getAllProductsForPage(Pageable pareRequest);
-
-    Product getProductByCode(int code);
-
-    Page<Product> getAllCategorizedProducts(List<Integer> categoryCodes, Pageable pareRequest);
+    @GetMapping
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return LOGIN;
+    }
 }
