@@ -188,3 +188,27 @@ body {
     background-color: #ffffff;
     padding: 5px 10px;
 }
+
+.cart__wrapper {
+    margin: 40px auto;
+    width: 600px;
+    border: 1px solid #6F6F6F;
+    border-radius: 26px;
+    padding: 20px;
+}
+
+.cart__item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #6F6F6F;
+}
+
+.cart__item-details {
+    width: 70%;
+    text-align: left;
+    font-size: 18px;
+}
+
+.cart__item-button {
+    width: 30%;
+}
