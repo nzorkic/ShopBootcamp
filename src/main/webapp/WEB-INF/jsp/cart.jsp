@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Guru Registration Form</title>
+    <title>Cart</title>
     <link href="/css/main.css" rel="stylesheet"/>
 </head>
 
