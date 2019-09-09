@@ -50,3 +50,7 @@ var getUrlCategoryParameter = function getUrlCategoryParameter(sParam) {
 
     return result;
 };
+function addToCart() {
+    alert("Product has been successfully added to cart");
+
+}

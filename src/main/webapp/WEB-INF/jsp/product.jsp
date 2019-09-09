@@ -8,6 +8,7 @@
 <head>
     <link href="/css/main.css" rel="stylesheet"/>
     <link href="/css/product.css" rel="stylesheet"/>
+    <title>Product page</title>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
                 <p class="product__description">${product.description}</p>
                 <div class="product__price">Price
                     <span class="product__badge product__badge--green">
-                        ${product.price}
+                        ${product.price} $
                     </span>
                 </div>
                 <div class="product__quantity">Quantity

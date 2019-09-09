@@ -4,16 +4,17 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Guru Registration Form</title>
+    <title>Order</title>
     <link href="/css/main.css" rel="stylesheet"/>
 </head>
 
 <body>
 <jsp:include page="common/header.jsp"/>
-<div class="content">
-    <h1>Congratulations, order has been successfully placed!</h1>
+<div class="content order">
+    <img class="order__image" src="images/shopping-cart.png">
+    <h2 class="order__message">Congratulations, order has been successfully placed!</h2>
     <a href="/products">
-        <button>Continue Shopping</button>
+        <button class="form__button form__button--blue order__button">Continue Shopping</button>
     </a>
 </div>
 <jsp:include page="common/footer.jsp"/>

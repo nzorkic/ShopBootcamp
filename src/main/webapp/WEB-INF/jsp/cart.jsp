@@ -4,29 +4,44 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Guru Registration Form</title>
+    <title>Cart</title>
     <link href="/css/main.css" rel="stylesheet"/>
 </head>
 
 <body>
 <jsp:include page="common/header.jsp"/>
 <div class="content">
-    <c:forEach items="${cartItems}" var="item">
-        <form:form action="/cart/remove/${item.code}" method="post">
-            <p>Product Name: ${item.product.name}</p>
-            <p>Qty: ${item.quantity}</p>
-            <p>Price: ${item.quantity * item.product.price} RSD</p>
-            <input type="submit" value="Remove Item">
-        </form:form>
+    <div class="cart__wrapper">
+        <c:forEach items="${cartItems}" var="item">
+            <form:form action="/cart/remove/${item.code}" method="post" class="cart__item">
+                <img src="/images/products/${item.product.image}" class="cart__item-image">
+                <div class="cart__item-details">
+                    <p class="cart__item-product">Product Name: ${item.product.name}</p>
+                    <p class="cart__item-quantity">Qty: ${item.quantity}</p>
+                    <p class="cart__item-price">Price: ${item.quantity * item.product.price} RSD</p>
+                </div>
+                <div class="cart__item-button">
+                    <input type="submit" onclick="removeFromCart()" value="Remove Item" class="form__button form__button--red">
+                </div>
+            </form:form>
+        </c:forEach>
 
-    </c:forEach>
-    <h2>Total: ${total}</h2>
-    <c:if test="${total gt 0}">
-        <form:form action="/cart/purchase" method="post">
-            <input type="submit" value="Make Order">
-        </form:form>
-    </c:if>
+        <h2>Total: ${total} RSD</h2>
+        <c:if test="${total gt 0}">
+            <form:form action="/cart/purchase" method="post">
+                <input type="submit" onclick="makeOrder()" value="Make Order" class="form__button form__button--blue">
+            </form:form>
+        </c:if>
+    </div>
 </div>
 <jsp:include page="common/footer.jsp"/>
+<script>
+    function removeFromCart() {
+        alert("Product has been successfully removed from cart.");
+    }
+    function makeOrder() {
+        alert("Order has been successfully made.");
+    }
+</script>
 </body>
 </html>
