@@ -145,6 +145,12 @@ body {
     color: #1685C5;
 }
 
+.form__button--red {
+    background-color: #CD5C5C;
+    border: 1px solid #CD5C5C;
+    color: #ffffff;
+}
+
 .form__button:hover {
     box-shadow: 0px 10px 10px lightgrey;
     cursor: pointer;
@@ -170,7 +176,7 @@ body {
 .form__error {
     display: block;
     padding: 15px;
-    background-color: indianred;
+    background-color: #CD5C5C;
     color: #ffffff;
     font-size: 20px;
 }

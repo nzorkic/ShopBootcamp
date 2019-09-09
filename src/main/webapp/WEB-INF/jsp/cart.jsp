@@ -20,7 +20,7 @@
                     <p class="cart__item-price">Price: ${item.quantity * item.product.price} RSD</p>
                 </div>
                 <div class="cart__item-button">
-                    <input type="submit" value="Remove Item" class="form__button form__button--blue">
+                    <input type="submit" value="Remove Item" class="form__button form__button--red">
                 </div>
             </form:form>
         </c:forEach>
