@@ -8,6 +8,7 @@
 <head>
     <link href="/css/main.css" rel="stylesheet"/>
     <link href="/css/product.css" rel="stylesheet"/>
+    <title>Product page</title>
 </head>
 
 <body>

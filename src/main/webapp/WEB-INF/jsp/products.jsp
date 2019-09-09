@@ -7,6 +7,7 @@
 <head>
     <link href="/css/main.css" rel="stylesheet"/>
     <link href="/css/productList.css" rel="stylesheet"/>
+    <title>Products</title>
 </head>
 
 <body>
