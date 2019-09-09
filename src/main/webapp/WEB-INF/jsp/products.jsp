@@ -62,7 +62,7 @@
             <div class="page-container middle">
                 <div class="pagination">
                     <c:forEach begin="1" end="${pages}" varStatus="loop">
-                        <button name="page" value="${loop.index}" type="submit">Page ${loop.index}</button>
+                        <button name="page" class="pagination__button" value="${loop.index}" type="submit">Page ${loop.index}</button>
                     </c:forEach>
                     </form:form>
                 </div>
