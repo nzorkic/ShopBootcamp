@@ -53,7 +53,7 @@
                             <p class="product__details-description">${product.description}</p>
                             <p class="product__details-price">${product.price} RSD</p>
                             <form:form method="post" action="/cart/add/${product.code}">
-                                <button class="product__details-button" type="submit">Add to cart</button>
+                                <button class="product__details-button" type="submit" onclick="addToCart()" >Add to cart</button>
                             </form:form>
                         </div>
                     </div>
