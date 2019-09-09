@@ -13,24 +13,12 @@
  * (c) 2019 by NETCONOMY Software & Consulting GmbH
  *********************************************************************/
 
-package com.msgnetconomy.shop.controllers.constants;
+package com.msgnetconomy.shop.repository;
+
+import com.msgnetconomy.shop.domain.Cart;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @author nzorkic@netconomy.net
  */
-public interface ControllerConstants {
-
-    String REDIRECT_PREFIX = "redirect:";
-    String SLASH = "/";
-
-    interface Pages {
-
-        String LOGIN = "login";
-        String REGISTRATION = "registration";
-        String PRODUCTS = "products";
-        String USER = "user";
-        String PRODUCT = "product";
-        String CART = "cart";
-        String ORDER = "order";
-    }
-}
+public interface CartRepository extends JpaRepository<Cart, Integer> { }

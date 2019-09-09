@@ -74,8 +74,8 @@ public class Product {
         return image;
     }
 
-    public void setImage(String picture) {
-        this.image = picture;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Basic

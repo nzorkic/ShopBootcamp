@@ -16,6 +16,7 @@
 package com.msgnetconomy.shop.controllers;
 
 import com.msgnetconomy.shop.domain.User;
+import com.msgnetconomy.shop.services.CartService;
 import com.msgnetconomy.shop.services.UserService;
 import com.msgnetconomy.shop.utils.ErrorUtils;
 import com.msgnetconomy.shop.validators.UserValidator;
@@ -50,6 +51,9 @@ public class RegistrationController {
     private UserService userService;
 
     @Autowired
+    private CartService cartService;
+
+    @Autowired
     private UserValidator userValidator;
 
     @GetMapping
@@ -69,7 +73,8 @@ public class RegistrationController {
             return REDIRECT_PREFIX + REGISTRATION_PAGE;
         }
         user.setImage("user_placeholder.png");
-        userService.saveUser(user);
+        user.setCart(cartService.createCart());
+        userService.createUser(user);
         model.addAttribute("successMessage", REGISTERED_SUCCESSFULLY);
         model.addAttribute("user", user);
         return REDIRECT_PREFIX + LOGIN_PAGE;

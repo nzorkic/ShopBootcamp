@@ -15,32 +15,21 @@
 
 package com.msgnetconomy.shop.controllers;
 
-import com.msgnetconomy.shop.exceptions.UserNotFoundException;
-import com.msgnetconomy.shop.services.UserService;
-import com.msgnetconomy.shop.validators.UserValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.USER;
+import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.ORDER;
 
 /**
  * @author nzorkic@netconomy.net
  */
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("order")
+public class OrderController {
 
-    @Autowired
-    private UserService userService;
-
-    @GetMapping("{username}")
-    @ExceptionHandler(UserNotFoundException.class)
-    public String getUser(@PathVariable String username) {
-        userService.findUserByUsername(username);
-        return USER;
+    @GetMapping
+    public String getOrderPage() {
+        return ORDER;
     }
 }

@@ -32,28 +32,28 @@ import javax.persistence.Table;
 @Table(name = "cart_entry", schema = "shopdb")
 public class CartEntry {
 
-    private String code;
-    private double quantity;
+    private int code;
+    private int quantity;
     private Product product;
     private Cart cart;
 
     @Id
     @Column(name = "code")
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
     @Basic
     @Column(name = "quantity")
-    public double getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -71,8 +71,8 @@ public class CartEntry {
             return false;
         }
         CartEntry cartEntry = (CartEntry) o;
-        return Double.compare(cartEntry.quantity, quantity) == 0 &&
-            Objects.equals(code, cartEntry.code);
+        return code == cartEntry.code &&
+            cartEntry.quantity == quantity;
     }
 
     @ManyToOne
