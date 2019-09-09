@@ -73,7 +73,6 @@
 </div>
 <jsp:include page="common/footer.jsp"/>
 
-<script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="/js/productList.js"></script>
 
