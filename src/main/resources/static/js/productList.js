@@ -15,6 +15,10 @@ $(document).ready(function () {
     if (priceSort !== undefined) {
         $('select[name=\'priceSort\'] option[value=' + priceSort + ']').attr('selected', 'selected');
     }
+
+    if (page !== undefined) {
+        $("button[value=" + page + "]").css("border", "5px solid red");
+    }
 });
 
 var getUrlParameter = function getUrlParameter(sParam) {
