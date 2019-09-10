@@ -14,8 +14,8 @@ import java.util.Objects;
 public class UserValidator implements Validator {
 
     private static final String USERNAME_EXISTS = "There is already a user registered with that username.";
-    private static final String USERNAME_SIZE = "Username must contains more than 6 characters, less than 32 characters";
-    private static final String PASSWORD_SIZE = "Password must contains more than 8 characters, less than 32 characters";
+    private static final String USERNAME_SIZE = "Username must contain more than 5 characters, less than 32 characters";
+    private static final String PASSWORD_SIZE = "Password must contain more than 7 characters, less than 32 characters";
 
     @Autowired
     private UserService userService;
