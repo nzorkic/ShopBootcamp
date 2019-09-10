@@ -12,27 +12,7 @@
 <body>
 <jsp:include page="common/header.jsp"/>
 <div class=content>
-    <c:if test="${errorMessage != null}">
-        <div class="form__error">${errorMessage}</div>
-    </c:if>
-    <form:form action="login" method="post" class="form">
-        <h1 class="form__heading">Login form</h1>
-        <div class="form__item">
-            <label for="username" class="form__item-label">Username</label>
-            <input type="text" name="username" class="form__item-input" required/>
-        </div>
-        <div class="form__item">
-            <label for="password" class="form__item-label">Password</label>
-            <input type="password" name="password" class="form__item-input" required/>
-        </div>
-        <input type="submit" value="Sign in" class="form__button form__button--blue"/>
-        <div class="form__delimiter--div">
-          <span class="form__delimiter--span">
-            OR
-          </span>
-        </div>
-        <input type="button" onclick="location.href='/registration';" value="Register" class="form__button form__button--blue"/>
-    </form:form>
+
 </div>
 <jsp:include page="common/footer.jsp"/>
 </body>
