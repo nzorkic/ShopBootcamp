@@ -50,7 +50,8 @@ var getUrlCategoryParameter = function getUrlCategoryParameter(sParam) {
 
     return result;
 };
-function addToCart() {
-    alert("Product has been successfully added to cart");
 
+function addToCart(path) {
+    $.post(path);
+    alert('Product added to the cart.');
 }

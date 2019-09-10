@@ -21,27 +21,19 @@
                     <p class="cart__item-price">Price: ${item.quantity * item.product.price} RSD</p>
                 </div>
                 <div class="cart__item-button">
-                    <input type="submit" onclick="removeFromCart()" value="Remove Item" class="form__button form__button--red">
+                    <input type="submit" value="Remove Item" class="form__button form__button--red">
                 </div>
             </form:form>
         </c:forEach>
 
         <h2>Total: ${total} RSD</h2>
-        <c:if test="${total gt 0}">
+        <c:if test="${total ne '0'}">
             <form:form action="/cart/purchase" method="post">
-                <input type="submit" onclick="makeOrder()" value="Make Order" class="form__button form__button--blue">
+                <input type="submit" value="Make Order" class="form__button form__button--blue">
             </form:form>
         </c:if>
     </div>
 </div>
 <jsp:include page="common/footer.jsp"/>
-<script>
-    function removeFromCart() {
-        alert("Product has been successfully removed from cart.");
-    }
-    function makeOrder() {
-        alert("Order has been successfully made.");
-    }
-</script>
 </body>
 </html>

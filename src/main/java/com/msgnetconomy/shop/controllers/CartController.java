@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,7 +58,8 @@ public class CartController {
     public String getCart(Model model, HttpServletRequest request) {
         List<CartEntry> cartItems = cartService.getCartEntries(request);
         model.addAttribute("cartItems", cartItems);
-        model.addAttribute("total", cartService.calculateTotal(cartItems));
+        DecimalFormat priceFormatter = new DecimalFormat("#.##");
+        model.addAttribute("total", priceFormatter.format(cartService.calculateTotal(cartItems)));
         return CART;
     }
 

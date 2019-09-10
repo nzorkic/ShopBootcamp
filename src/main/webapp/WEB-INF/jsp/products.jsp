@@ -53,9 +53,9 @@
                             <h3>${product.name} | ${product.category.name}</h3>
                             <p class="product__details-description">${product.description}</p>
                             <p class="product__details-price">${product.price} RSD</p>
-                            <form:form method="post" action="/cart/add/${product.code}">
-                                <button class="product__details-button" type="submit" onclick="addToCart()" >Add to cart</button>
-                            </form:form>
+                            <button class="product__details-button" type="submit" onclick="addToCart('/cart/add/${product.code}')">
+                                Add to cart
+                            </button>
                         </div>
                     </div>
                 </c:forEach>
