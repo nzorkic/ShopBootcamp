@@ -42,7 +42,7 @@
         <div class="product-list">
             <div id="products">
                 <c:forEach items="${products}" var="product">
-                    <div class="product" style="height: 600px">
+                    <div class="product">
                         <img class="product__sale" src="<%=request.getContextPath()%>/images/sale.png"
                              alt="sale logo">
                         <a href="/product/${product.code}">
