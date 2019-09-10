@@ -35,7 +35,7 @@
                     </p>
                 </div>
                 <form:form method="post" action="/cart/add/${product.code}">
-                    <button class="product__details-button" type="submit">Add to cart</button>
+                    <button class="product__details-button" type="submit" onclick="alert('Added to the cart.')">Add to cart</button>
                 </form:form>
             </div>
         </div>
