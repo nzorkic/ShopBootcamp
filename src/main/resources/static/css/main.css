@@ -62,6 +62,7 @@ body {
 
 .header__item--right {
     float: right;
+    border-right: none;
 }
 
 .footer {
