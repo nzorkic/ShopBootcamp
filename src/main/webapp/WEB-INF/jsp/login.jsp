@@ -10,7 +10,7 @@
 
 <body>
 <jsp:include page="common/header.jsp"/>
-<div class=content>
+<div class="content">
     <c:if test="${errorMessage != null}">
         <div class="form__error">${errorMessage}</div>
     </c:if>
