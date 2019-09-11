@@ -17,7 +17,6 @@ package com.msgnetconomy.shop.controllers;
 
 import com.msgnetconomy.shop.exceptions.UserNotFoundException;
 import com.msgnetconomy.shop.services.UserService;
-import com.msgnetconomy.shop.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;

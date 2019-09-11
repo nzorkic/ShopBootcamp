@@ -34,8 +34,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.PRODUCTS;
 
 /**

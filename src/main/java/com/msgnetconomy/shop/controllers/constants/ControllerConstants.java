@@ -24,7 +24,6 @@ public interface ControllerConstants {
     String SLASH = "/";
 
     interface Pages {
-
         String LOGIN = "login";
         String REGISTRATION = "registration";
         String PRODUCTS = "products";

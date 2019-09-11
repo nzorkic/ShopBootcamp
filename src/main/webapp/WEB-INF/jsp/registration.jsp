@@ -17,7 +17,7 @@
     <c:if test="${errorMessage != null}">
         <div class="form__error">${errorMessage}</div>
     </c:if>
-    <form:form action="registration" method="post" class="form">
+    <form:form action="registration" modelAttribute="user" method="post" class="form">
         <h1 class="form__heading">Register Form</h1>
         <div class="form__item">
             <label for="firstName" class="form__item-label">First Name</label>

@@ -48,8 +48,8 @@ public class PageProvider {
 
     public static Pageable createPageRequest(Optional<Integer> page, Integer perPage, FilterForm filterForm) {
         int currentPage = page.orElse(0) < 1 ? INITIAL_PAGE : page.get() - 1;
-        int productsFerPage = perPage == null ? PER_PAGE_DEFAULT : perPage;
-        return createPageRequest(currentPage, productsFerPage, filterForm);
+        int productsPerPage = perPage == null ? PER_PAGE_DEFAULT : perPage;
+        return createPageRequest(currentPage, productsPerPage, filterForm);
     }
 
     private static List<Order> getSortingOrders(FilterForm filterForm) {
