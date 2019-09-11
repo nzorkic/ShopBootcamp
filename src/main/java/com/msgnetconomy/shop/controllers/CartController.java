@@ -74,7 +74,11 @@ public class CartController {
         return REDIRECT_PREFIX + request.getHeader("referer");
     }
 
-    // TODO TASK 4: Create POST request method for removing cart entry
+    @PostMapping("remove/{entryCode}")
+    public String removeFromCart(@PathVariable Integer entryCode) {
+        cartService.removeFromCart(entryCode);
+        return "redirect:/cart";
+    }
 
     @PostMapping("/purchase")
     public String makeOrder(HttpServletRequest request) {
