@@ -11,7 +11,7 @@
 
 <body>
 <jsp:include page="common/header.jsp"/>
-<div class=content>
+<div class="content">
 
 </div>
 <jsp:include page="common/footer.jsp"/>
