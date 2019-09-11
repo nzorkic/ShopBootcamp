@@ -17,7 +17,6 @@ package com.msgnetconomy.shop.controllers;
 
 import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.services.CartService;
-import com.msgnetconomy.shop.services.UserService;
 import com.msgnetconomy.shop.utils.ErrorUtils;
 import com.msgnetconomy.shop.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.LOGIN;
@@ -53,7 +51,10 @@ public class RegistrationController {
     @Autowired
     private UserValidator userValidator;
 
-    // TODO TASK 1: Create method for registration GET request
+    @GetMapping
+    public String register() {
+        return "registration";
+    }
 
     @PostMapping
     public String register(@ModelAttribute("user") User user,
