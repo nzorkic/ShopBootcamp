@@ -17,12 +17,14 @@ package com.msgnetconomy.shop.controllers;
 
 import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.services.CartService;
+import com.msgnetconomy.shop.services.UserService;
 import com.msgnetconomy.shop.utils.ErrorUtils;
 import com.msgnetconomy.shop.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,12 +47,18 @@ public class RegistrationController {
     private static final String LOGIN_PAGE = SLASH + LOGIN;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private CartService cartService;
 
     @Autowired
     private UserValidator userValidator;
 
-    // TODO TASK 1: Create method for registration GET request
+    @GetMapping
+    public String register() {
+        return "registration";
+    }
 
     @PostMapping
     public String register(@ModelAttribute("user") User user,
@@ -64,7 +72,7 @@ public class RegistrationController {
         }
         user.setImage("user_placeholder.png");
         user.setCart(cartService.createCart());
-        // TODO TASK 2: Call user service to save user
+        userService.createUser(user);
         model.addAttribute("successMessage", REGISTERED_SUCCESSFULLY);
         model.addAttribute("user", user);
         return REDIRECT_PREFIX + LOGIN_PAGE;
