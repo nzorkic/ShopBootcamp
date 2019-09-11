@@ -50,10 +50,7 @@ public class RegistrationController {
     @Autowired
     private UserValidator userValidator;
 
-    @GetMapping
-    public String register() {
-        return "registration";
-    }
+    // TODO TASK 1: Create method for registration GET request
 
     @PostMapping
     public String register(@ModelAttribute("user") User user,
