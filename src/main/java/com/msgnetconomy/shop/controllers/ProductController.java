@@ -32,12 +32,5 @@ import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pa
 @RequestMapping("/product")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
-
-    @GetMapping("{code}")
-    public String getProductByCode(@PathVariable int code, Model model) {
-        model.addAttribute("product", productService.getProductByCode(code));
-        return PRODUCT;
-    }
+    // TODO TASK 3: Create GET request method for opening product page
 }

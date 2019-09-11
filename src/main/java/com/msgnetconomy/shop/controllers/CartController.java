@@ -45,7 +45,6 @@ import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.SL
 @RequestMapping("/cart")
 public class CartController {
 
-    private static final String CART_PAGE = SLASH + CART;
     private static final String ORDER_PAGE = SLASH + ORDER;
 
     @Autowired
@@ -75,11 +74,7 @@ public class CartController {
         return REDIRECT_PREFIX + request.getHeader("referer");
     }
 
-    @PostMapping("remove/{entryCode}")
-    public String removeFromCart(@PathVariable Integer entryCode) {
-        cartService.removeFromCart(entryCode);
-        return REDIRECT_PREFIX + CART_PAGE;
-    }
+    // TODO TASK 4: Create POST request method for removing cart entry
 
     @PostMapping("/purchase")
     public String makeOrder(HttpServletRequest request) {

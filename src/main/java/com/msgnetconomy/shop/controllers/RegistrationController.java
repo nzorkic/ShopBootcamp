@@ -48,19 +48,12 @@ public class RegistrationController {
     private static final String LOGIN_PAGE = SLASH + LOGIN;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private CartService cartService;
 
     @Autowired
     private UserValidator userValidator;
 
-    @GetMapping
-    public String register(@RequestParam(value = "errorMessage", required = false) String errorMessage, Model model) {
-        model.addAttribute("errorMessage", errorMessage);
-        return REGISTRATION;
-    }
+    // TODO TASK 1: Create method for registration GET request
 
     @PostMapping
     public String register(@ModelAttribute("user") User user,
@@ -74,7 +67,7 @@ public class RegistrationController {
         }
         user.setImage("user_placeholder.png");
         user.setCart(cartService.createCart());
-        userService.createUser(user);
+        // TODO TASK 2: Call user service to save user
         model.addAttribute("successMessage", REGISTERED_SUCCESSFULLY);
         model.addAttribute("user", user);
         return REDIRECT_PREFIX + LOGIN_PAGE;
