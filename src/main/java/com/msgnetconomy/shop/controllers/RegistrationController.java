@@ -57,20 +57,19 @@ public class RegistrationController {
     private UserValidator userValidator;
 
     @GetMapping
-    public String register(@RequestParam(value = "errorMessage", required = false) String errorMessage, Model model) {
-        model.addAttribute("errorMessage", errorMessage);
+    public String register() {
+        // Pass error message to model
         return REGISTRATION;
     }
 
     @PostMapping
     public String register(@ModelAttribute("user") User user,
                            BindingResult bindingResult,
-                           Model model,
-                           RedirectAttributes redirectAttributes) {
+                           Model model) {
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addAttribute("errorMessage", ErrorUtils.getErrorMessage(bindingResult));
-            return REDIRECT_PREFIX + REGISTRATION_PAGE;
+            // TODO TASK 5: Add bindingResult to redirectAttribute
+            // ErrorUtils.getErrorMessage(bindingResult)
         }
         user.setImage("user_placeholder.png");
         user.setCart(cartService.createCart());
