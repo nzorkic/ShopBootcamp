@@ -16,7 +16,6 @@
 package com.msgnetconomy.shop.services.impl;
 
 import com.msgnetconomy.shop.domain.Product;
-import com.msgnetconomy.shop.forms.FilterForm;
 import com.msgnetconomy.shop.repository.ProductRepository;
 import com.msgnetconomy.shop.services.ProductService;
 import org.springframework.data.domain.Page;
@@ -40,11 +39,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> getAllProductsForPage(Pageable pareRequest) {
         return productRepository.findAll(pareRequest);
-    }
-
-    @Override
-    public Product getProductByCode(int code) {
-        return productRepository.getOne(code);
     }
 
     @Override

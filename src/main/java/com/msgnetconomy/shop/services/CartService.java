@@ -17,7 +17,6 @@ package com.msgnetconomy.shop.services;
 
 import com.msgnetconomy.shop.domain.Cart;
 import com.msgnetconomy.shop.domain.CartEntry;
-import com.msgnetconomy.shop.domain.Product;
 
 import java.util.List;
 
@@ -29,14 +28,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface CartService {
 
     Cart createCart();
-
-    Cart getCartForUser(HttpServletRequest request);
-
-    boolean entryExistsInCart(Cart cart, Product product);
-
-    void updateQuantity(Cart cart, Product product);
-
-    void createCartEntry(Cart cart, Product product);
 
     List<CartEntry> getCartEntries(HttpServletRequest request);
 

@@ -28,7 +28,5 @@ public interface ProductService {
 
     Page<Product> getAllProductsForPage(Pageable pareRequest);
 
-    Product getProductByCode(int code);
-
     Page<Product> getAllCategorizedProducts(List<Integer> categoryCodes, Pageable pareRequest);
 }

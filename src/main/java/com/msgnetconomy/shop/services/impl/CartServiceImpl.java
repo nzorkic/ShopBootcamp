@@ -17,7 +17,6 @@ package com.msgnetconomy.shop.services.impl;
 
 import com.msgnetconomy.shop.domain.Cart;
 import com.msgnetconomy.shop.domain.CartEntry;
-import com.msgnetconomy.shop.domain.Product;
 import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.repository.CartEntryRepository;
 import com.msgnetconomy.shop.repository.CartRepository;
@@ -46,31 +45,6 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart createCart() {
         return cartRepository.save(new Cart());
-    }
-
-    @Override
-    public Cart getCartForUser(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        return user.getCart();
-    }
-
-    @Override
-    public boolean entryExistsInCart(Cart cart, Product product) {
-        return cartEntryRepository.entryExistsInCart(cart, product).isPresent();
-    }
-
-    @Override
-    public void updateQuantity(Cart cart, Product product) {
-        cartEntryRepository.updateQuantityForProduct(product);
-    }
-
-    @Override
-    public void createCartEntry(Cart cart, Product product) {
-        CartEntry cartEntry = new CartEntry();
-        cartEntry.setCart(cart);
-        cartEntry.setProduct(product);
-        cartEntry.setQuantity(1);
-        cartEntryRepository.save(cartEntry);
     }
 
     @Override

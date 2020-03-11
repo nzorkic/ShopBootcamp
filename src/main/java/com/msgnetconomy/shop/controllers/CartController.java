@@ -15,11 +15,8 @@
 
 package com.msgnetconomy.shop.controllers;
 
-import com.msgnetconomy.shop.domain.Cart;
 import com.msgnetconomy.shop.domain.CartEntry;
-import com.msgnetconomy.shop.domain.Product;
 import com.msgnetconomy.shop.services.CartService;
-import com.msgnetconomy.shop.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,9 +48,6 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
-    @Autowired
-    private ProductService productService;
-
     @GetMapping
     public String getCart(Model model, HttpServletRequest request) {
         List<CartEntry> cartItems = cartService.getCartEntries(request);
@@ -63,17 +57,7 @@ public class CartController {
         return CART;
     }
 
-    @PostMapping("add/{code}")
-    public String addToCart(@PathVariable Integer code, HttpServletRequest request) {
-        Cart cart = cartService.getCartForUser(request);
-        Product productForCart = productService.getProductByCode(code);
-        if (cartService.entryExistsInCart(cart, productForCart)) {
-            cartService.updateQuantity(cart, productForCart);
-        } else {
-            cartService.createCartEntry(cart, productForCart);
-        }
-        return REDIRECT_PREFIX + request.getHeader("referer");
-    }
+    //TODO DAY 2 TASK2 - add to cart; check if entry already exists in cart
 
     @PostMapping("remove/{entryCode}")
     public String removeFromCart(@PathVariable Integer entryCode) {
