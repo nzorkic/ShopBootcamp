@@ -8,4 +8,6 @@ public interface UserService {
     User findUserByUsername(String username);
 
     User createUser(User user);
+
+    void updateUser(User user, String name);
 }

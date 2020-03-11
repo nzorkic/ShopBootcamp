@@ -15,14 +15,12 @@
 
 package com.msgnetconomy.shop.controllers;
 
+import com.msgnetconomy.shop.domain.User;
 import com.msgnetconomy.shop.exceptions.UserNotFoundException;
 import com.msgnetconomy.shop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import static com.msgnetconomy.shop.controllers.constants.ControllerConstants.Pages.USER;
 
@@ -41,5 +39,13 @@ public class UserController {
     public String getUser(@PathVariable String username) {
         userService.findUserByUsername(username);
         return USER;
+    }
+
+    @PostMapping("{username}/update")
+    public String updateUser(@PathVariable String username,
+                             @RequestParam(name = "firstName") String name) {
+        User user = userService.findUserByUsername(username);
+        userService.updateUser(user, name);
+        return "redirect:/user/" + username;
     }
 }

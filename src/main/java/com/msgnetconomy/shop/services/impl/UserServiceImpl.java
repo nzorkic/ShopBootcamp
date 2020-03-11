@@ -28,4 +28,11 @@ public class UserServiceImpl implements UserService {
         user.setSalt(salt);
         return userRepository.save(user);
     }
+
+    @Override
+    public void updateUser(User user, String name) {
+        userRepository.updateUser(name, user.getUsername());
+    }
+
+
 }
