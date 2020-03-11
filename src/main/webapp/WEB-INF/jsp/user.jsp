@@ -13,7 +13,7 @@
     <div class="user">
         <img src="<%=request.getContextPath()%>/images/users/${user.image}" class="user__image" alt="User image">
         <h1>${user.username}</h1>
-        <form:form action="changeUser" method="post" class="form">
+        <form:form action="${user.username}/update" method="post" class="form">
             <p class="user__details">First name: </p> <input type="text" name="firstName" value="${user.firstName}">
             <p class="user__details">Last name: ${user.lastName}</p>
             <input type="submit" value="Update">
