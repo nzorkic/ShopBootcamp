@@ -16,20 +16,14 @@
 package com.msgnetconomy.shop.controllers;
 
 import com.msgnetconomy.shop.domain.Cart;
-import com.msgnetconomy.shop.domain.CartEntry;
 import com.msgnetconomy.shop.domain.Product;
 import com.msgnetconomy.shop.services.CartService;
 import com.msgnetconomy.shop.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.text.DecimalFormat;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -54,15 +48,6 @@ public class CartController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping
-    public String getCart(Model model, HttpServletRequest request) {
-        List<CartEntry> cartItems = cartService.getCartEntries(request);
-        model.addAttribute("cartItems", cartItems);
-        DecimalFormat priceFormatter = new DecimalFormat("#.##");
-        model.addAttribute("total", priceFormatter.format(cartService.calculateTotal(cartItems)));
-        return CART;
-    }
-
     @PostMapping("add/{code}")
     public String addToCart(@PathVariable Integer code, HttpServletRequest request) {
         Cart cart = cartService.getCartForUser(request);
@@ -81,9 +66,5 @@ public class CartController {
         return REDIRECT_PREFIX + CART_PAGE;
     }
 
-    @PostMapping("/purchase")
-    public String makeOrder(HttpServletRequest request) {
-        cartService.removeOrdersFromCart(cartService.getCartEntries(request));
-        return REDIRECT_PREFIX + ORDER_PAGE;
-    }
+    //TODO DAY2 TASK 1 - make an order
 }

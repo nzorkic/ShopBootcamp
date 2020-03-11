@@ -25,9 +25,7 @@ import com.msgnetconomy.shop.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -74,16 +72,6 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartEntry> getCartEntries(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (Objects.nonNull(user)) {
-            Cart cart = user.getCart();
-            return Objects.isNull(cart) ? new ArrayList<>() : cartEntryRepository.findAllByCart(cart);
-        }
-        return new ArrayList<>();
-    }
-
-    @Override
     public void removeFromCart(int entryCode) {
         cartEntryRepository.deleteById(entryCode);
     }
@@ -93,8 +81,4 @@ public class CartServiceImpl implements CartService {
         return cartEntries.stream().mapToDouble(entry -> entry.getQuantity() * entry.getProduct().getPrice()).sum();
     }
 
-    @Override
-    public void removeOrdersFromCart(List<CartEntry> entries) {
-        cartEntryRepository.deleteAll(entries);
-    }
 }

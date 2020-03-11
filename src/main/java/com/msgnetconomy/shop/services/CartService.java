@@ -38,11 +38,8 @@ public interface CartService {
 
     void createCartEntry(Cart cart, Product product);
 
-    List<CartEntry> getCartEntries(HttpServletRequest request);
-
     void removeFromCart(int entryCode);
 
     double calculateTotal(List<CartEntry> cartEntries);
 
-    void removeOrdersFromCart(List<CartEntry> entries);
 }
