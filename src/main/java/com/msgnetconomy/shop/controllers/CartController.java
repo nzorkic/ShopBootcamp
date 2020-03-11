@@ -66,5 +66,7 @@ public class CartController {
         return REDIRECT_PREFIX + CART_PAGE;
     }
 
+    //TODO DAY2 TASK 1 - get cart and calculate total amount
+
     //TODO DAY2 TASK 1 - make an order; remove orders from cart
 }
