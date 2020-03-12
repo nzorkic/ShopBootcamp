@@ -17,10 +17,12 @@ package com.msgnetconomy.shop.repository;
 
 import com.msgnetconomy.shop.domain.Cart;
 import com.msgnetconomy.shop.domain.CartEntry;
+import com.msgnetconomy.shop.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author nzorkic@netconomy.net
@@ -29,4 +31,7 @@ public interface CartEntryRepository extends JpaRepository<CartEntry, Integer> {
 
     @Query("SELECT ce FROM CartEntry ce WHERE ce.cart = ?1")
     List<CartEntry> findAllByCart(Cart cart);
+
+    @Query("SELECT ce FROM CartEntry ce WHERE ce.cart = ?1 AND ce.product = ?2")
+    Optional<CartEntry> entryExistsInCart(Cart cart, Product product);
 }
